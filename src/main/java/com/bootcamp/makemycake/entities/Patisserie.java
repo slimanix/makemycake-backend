@@ -49,4 +49,8 @@ public class Patisserie {
     // New: One-to-Many relationship with Offre
     @OneToMany(mappedBy = "patisserie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Offre> offres;  // All offers created by this patisserie
+
+    @Column(name = "is_valid", nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private boolean isValid = false; // Par défaut non validé
+
 }

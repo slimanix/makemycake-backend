@@ -18,6 +18,9 @@ public interface PatisserieRepository extends JpaRepository<Patisserie, Long> {
     List<Patisserie> findByShopNameContainingIgnoreCase(String shopName);
 
     // Find all verified patisseries (with SIRET number)
-    @Query("SELECT p FROM Patisserie p WHERE p.siretNumber IS NOT NULL")
+    @Query("SELECT p FROM Patisserie p WHERE p.isValid = true")
     List<Patisserie> findAllVerifiedPatisseries();
+
+    @Query("SELECT p FROM Patisserie p WHERE p.isValid = false")
+    List<Patisserie> findAllNonValidatedPatisseries();
 }
