@@ -6,16 +6,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import com.bootcamp.makemycake.security.JwtAuthenticationFilter;  // Correct import
+import com.bootcamp.makemycake.security.JwtAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -39,21 +41,32 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // Permettre l'accès public à ces endpoints
                         .requestMatchers(
                                 "/auth/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
-                                "/swagger-ui.html"
+                                "/swagger-ui.html",
+                                "/api/offres",          // GET public
+                                "/api/offres/{id}",     // GET public
+                                "/api/offres/patisserie/**" // GET public
                         ).permitAll()
 
-                        // Routes pour les clients
-                        .requestMatchers("/client/**").hasAuthority("ROLE_CLIENT")
+                        // Endpoints clients
+                        .requestMatchers(
+                                "/api/offres",          // POST
+                                "/api/client/**"
+                        ).hasAuthority("CLIENT")
 
-                        // Routes pour les pâtissiers
-                        .requestMatchers("/patissier/**").hasAuthority("ROLE_PATISSIER")
+                        // Endpoints pâtissiers
+                        .requestMatchers(
+                                "/api/patissier/**",
+                                "/api/offres/my-offers" // Exemple spécifique
+                        ).hasAuthority("PATISSIER")
 
-                        // Routes pour les administrateurs
-                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        // Dans votre SecurityConfig, assurez-vous d'utiliser hasRole() partout:
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")  // Notez qu'ici on met juste "ADMIN"
+                        .requestMatchers("/api/offres/*/validate").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
                 )

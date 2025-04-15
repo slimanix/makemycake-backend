@@ -46,4 +46,8 @@ public class  User {
     private boolean enabled = false;
 
     private String activationToken;
+
+    public String getEmail() {
+        return email;
+    }
 }

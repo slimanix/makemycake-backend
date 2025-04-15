@@ -1,78 +1,73 @@
 package com.bootcamp.makemycake.controllers;
 
 import com.bootcamp.makemycake.dto.OfferRequest;
-import com.bootcamp.makemycake.entities.Offre;
-import com.bootcamp.makemycake.exceptions.offre.AddOfferException;
-import com.bootcamp.makemycake.exceptions.offre.DeleteOfferException;
-import com.bootcamp.makemycake.exceptions.offre.OffreNotFoundException;
+import com.bootcamp.makemycake.dto.OffreResponse;
 import com.bootcamp.makemycake.services.OfferService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/offres")
+@RequiredArgsConstructor
 public class OffreController {
 
     private final OfferService offerService;
 
-    public OffreController(OfferService offerService) {
-        this.offerService = offerService;
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<OffreResponse> createOffer(
+            @Valid @ModelAttribute OfferRequest request) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(offerService.createOffer(request));
     }
 
-    // 1. Création d'une offre
-    @PostMapping
-    public ResponseEntity<Offre> createOffer(@Valid @RequestBody OfferRequest request) {
-        try {
-            Offre newOffer = offerService.addOffer(request);
-            return new ResponseEntity<>(newOffer, HttpStatus.CREATED);
-        } catch (AddOfferException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    // 2. Suppression d'une offre
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOffer(@PathVariable Long id) {
-        try {
-            offerService.deleteOffer(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (DeleteOfferException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        offerService.deleteOffer(id);
+        return ResponseEntity.noContent().build();
     }
 
-    // 3. Récupération de toutes les offres (non paginée)
     @GetMapping
-    public ResponseEntity<List<Offre>> getAllOffers() {
-        return new ResponseEntity<>(offerService.getAllOffers(), HttpStatus.OK);
+    public ResponseEntity<List<OffreResponse>> getAllOffers() {
+        return ResponseEntity.ok(offerService.getAllOffers());
     }
 
-
-
-    // 5. Récupération d'une offre par ID
     @GetMapping("/{id}")
-    public ResponseEntity<Offre> getOfferById(@PathVariable Long id) {
-        try {
-            return new ResponseEntity<>(offerService.getOfferById(id), HttpStatus.OK);
-        } catch (OffreNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<OffreResponse> getOfferById(@PathVariable Long id) {
+        return ResponseEntity.ok(offerService.getOfferById(id));
     }
 
-    // 6. Récupération des offres par pâtisserie (ID)
     @GetMapping("/patisserie/{patisserieId}")
-    public ResponseEntity<List<Offre>> getOffersByPatisserie(@PathVariable Long patisserieId) {
-        try {
-            return new ResponseEntity<>(offerService.getOffersByPatisserieId(patisserieId), HttpStatus.OK);
-        } catch (OffreNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<List<OffreResponse>> getOffersByPatisserie(
+            @PathVariable Long patisserieId) {
+        return ResponseEntity.ok(offerService.getOffersByPatisserie(patisserieId));
     }
 
+    @GetMapping("/patisserie/{patisserieId}/paginated")
+    public ResponseEntity<Page<OffreResponse>> getOffersByPatisseriePaginated(
+            @PathVariable Long patisserieId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(
+                offerService.getOffersByPatisseriePaginated(patisserieId, page, size));
+    }
 
+    @PutMapping("/{id}/validate")
+    @PreAuthorize("hasRole('ADMIN')") // Sécurisez l'accès
+    public ResponseEntity<OffreResponse> validateOffer(
+            @PathVariable Long id,
+            @RequestParam boolean isValid) {
+
+        return ResponseEntity.ok(
+                offerService.validateOffer(id, isValid)
+        );
+    }
 }

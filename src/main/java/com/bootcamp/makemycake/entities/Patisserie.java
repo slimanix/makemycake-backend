@@ -1,5 +1,6 @@
 package com.bootcamp.makemycake.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,8 @@ public class Patisserie {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // ← Ajoutez ceci
+
     private User user;
 
     @Column(name = "shop_name", nullable = false)

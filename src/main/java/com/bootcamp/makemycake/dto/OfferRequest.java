@@ -25,7 +25,7 @@ public class OfferRequest {
     private Double prix;
 
     @NotNull(message = "La photo est obligatoire")
-    @JsonIgnore // Empêche la sérialisation du fichier
+    @JsonIgnore
     private MultipartFile photo;
 
     @NotNull(message = "L'ID de la pâtisserie est obligatoire")

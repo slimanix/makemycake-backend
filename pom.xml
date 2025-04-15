@@ -1,117 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <!-- Déclaration de la version du modèle POM utilisé (4.0.0 est la version actuelle) -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Définition du parent (Spring Boot Starter Parent) -->
     <parent>
-        <groupId>org.springframework.boot</groupId> <!-- Groupe d'identification du parent -->
-        <artifactId>spring-boot-starter-parent</artifactId> <!-- Identifiant de l'artefact -->
-        <version>3.4.4</version> <!-- Version de Spring Boot -->
-        <relativePath/> <!-- Pas de chemin relatif, Spring va chercher ce parent dans le repository -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.4</version>
+        <relativePath/>
     </parent>
 
-    <!-- Informations de base sur le projet -->
-    <groupId>com.bootcamp</groupId> <!-- Identifiant du groupe pour ce projet -->
-    <artifactId>makemycake</artifactId> <!-- Nom de l'artefact (le projet en général) -->
-    <version>0.0.1-SNAPSHOT</version> <!-- Version du projet en cours de développement -->
-    <name>makemycake</name> <!-- Nom complet du projet -->
-    <description>Demo project for Spring Boot</description> <!-- Brève description du projet -->
-    <url/> <!-- URL du projet (vide ici mais peut contenir un lien vers un site de projet) -->
+    <groupId>com.bootcamp</groupId>
+    <artifactId>makemycake</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>makemycake</name>
+    <description>Demo project for Spring Boot</description>
 
-    <!-- Propriétés du projet -->
     <properties>
-        <java.version>17</java.version> <!-- Spécifie que la version de Java utilisée est la 17 -->
+        <java.version>17</java.version>
+        <commons-io.version>2.15.1</commons-io.version>
     </properties>
 
-    <!-- Dépendances du projet -->
     <dependencies>
-
-        <!-- Dépendances pour l'intégration de Spring Boot -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId> <!-- Identifiant de Spring Boot -->
-            <artifactId>spring-boot-starter-security</artifactId> <!-- Starter pour la gestion de la sécurité (authentification, autorisation, etc.) -->
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId> <!-- Starter pour la création de services Web REST -->
-            <artifactId>spring-boot-starter-web</artifactId> <!-- Inclut les dépendances nécessaires pour une application web -->
-        </dependency>
-
+        <!-- Spring Boot Starters -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId> <!-- Intégration de Spring Data JPA pour la gestion de la persistance des données avec une base de données -->
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!-- Dépendance pour le connecteur MySQL -->
         <dependency>
-            <groupId>mysql</groupId> <!-- Groupe du connecteur MySQL -->
-            <artifactId>mysql-connector-java</artifactId> <!-- Identifiant de l'artefact du connecteur -->
-            <version>8.0.12</version> <!-- Version du connecteur -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
-        <!-- Dépendances pour JWT (JSON Web Tokens) pour la gestion de l'authentification avec tokens JWT -->
+        <!-- Database -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.12</version>
+        </dependency>
+
+        <!-- JWT -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
-            <version>0.11.5</version> <!-- Dernière version stable -->
+            <version>0.11.5</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
-            <version>0.11.5</version> <!-- Dernière version stable -->
+            <version>0.11.5</version>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.5</version> <!-- Dernière version stable -->
+            <version>0.11.5</version>
+            <scope>runtime</scope>
         </dependency>
 
-        <!-- Dépendance pour la validation des objets en Java (par exemple, validation de champs dans les entités) -->
+        <!-- Utils -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId> <!-- Starter Spring Boot pour la validation de données (Hibernate Validator) -->
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
-
-        <!-- Spring Mail pour l'envoi d'emails (par exemple, pour l'activation d'un compte utilisateur) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId> <!-- Starter pour l'envoi d'emails via Spring Boot -->
-        </dependency>
-
-        <!-- Lombok pour réduire le code boilerplate (ex. : génération automatique des getters/setters) -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId> <!-- Lombok génère automatiquement les méthodes telles que getters, setters, toString, etc. -->
-            <scope>provided</scope> <!-- Le code est fourni lors de la compilation mais pas lors de l'exécution -->
-        </dependency>
-
-        <!-- Dépendances pour les tests (JUnit, Mockito, etc.) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId> <!-- Starter pour les tests avec Spring Boot -->
-            <scope>test</scope> <!-- La dépendance est utilisée uniquement pour les tests -->
-        </dependency>
-
-        <!-- Apache Commons Lang3 (fournit des utilitaires pour les opérations sur des objets, des chaînes, etc.) -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version> <!-- Version de Commons Lang3 -->
+            <version>3.12.0</version>
         </dependency>
 
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
-    <!-- Plugins utilisés pour la construction du projet -->
     <build>
         <plugins>
-            <!-- Plugin Maven pour Spring Boot -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId> <!-- Plugin pour packager et exécuter l'application Spring Boot via Maven -->
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
-
 </project>
