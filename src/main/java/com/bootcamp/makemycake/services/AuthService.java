@@ -65,6 +65,7 @@ public class AuthService {
             patisserie.setPhoneNumber(request.getPhoneNumber());
             patisserie.setLocation(request.getLocation());
             patisserie.setSiretNumber(request.getSiretNumber());
+            patisserie.setValidated(false);
             patisserieRepository.save(patisserie);
         }
 
@@ -107,6 +108,16 @@ public class AuthService {
         userRepository.save(user);
 
         return new ApiResponse<>("Compte activé avec succès !", HttpStatus.OK.value());
+    }
+
+    public ApiResponse<String> validatePatisserie(Long id) {
+        Patisserie patisserie = patisserieRepository.findById(id)
+                .orElseThrow(() -> new InvalidTokenException("Token invalide !"));
+
+        patisserie.setValidated(true);
+        patisserieRepository.save(patisserie);
+
+        return new ApiResponse<>("Patissrie valider avec succès !", HttpStatus.OK.value());
     }
 
     public void forgotPassword(String email) throws Exception {
