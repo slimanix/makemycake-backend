@@ -46,6 +46,8 @@ public class Patisserie {
     @Column(name = "siret_number")
     private String siretNumber;
 
+    private boolean validated = false;
+
     // New: One-to-Many relationship with Offre
     @OneToMany(mappedBy = "patisserie", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Offre> offres;  // All offers created by this patisserie
