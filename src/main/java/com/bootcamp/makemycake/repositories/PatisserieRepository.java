@@ -21,6 +21,9 @@ public interface PatisserieRepository extends JpaRepository<Patisserie, Long> {
     public Optional<Patisserie> findById(Long id);  // Existe par défaut  // Déjà disponible grâce à JpaRepository
 
     // Find all verified patisseries (with SIRET number)
-    @Query("SELECT p FROM Patisserie p WHERE p.siretNumber IS NOT NULL")
+    @Query("SELECT p FROM Patisserie p WHERE p.isValid = true")
     List<Patisserie> findAllVerifiedPatisseries();
+
+    @Query("SELECT p FROM Patisserie p WHERE p.isValid = false")
+    List<Patisserie> findAllNonValidatedPatisseries();
 }
