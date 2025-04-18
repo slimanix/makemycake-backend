@@ -3,7 +3,13 @@ package com.bootcamp.makemycake.controllers;
 import com.bootcamp.makemycake.dto.ApiResponse;
 import com.bootcamp.makemycake.dto.PatisserieResponse;
 import com.bootcamp.makemycake.entities.Patisserie;
+import com.bootcamp.makemycake.entities.User;
+import com.bootcamp.makemycake.exceptions.email.SendingEmailException;
+import com.bootcamp.makemycake.exceptions.paiement.NotFoundException;
 import com.bootcamp.makemycake.repositories.PatisserieRepository;
+import com.bootcamp.makemycake.services.EmailService;
+import jakarta.mail.MessagingException;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -21,6 +28,8 @@ public class AdminController {
 
     @Autowired
     private PatisserieRepository patisserieRepository;
+    @Autowired
+    private EmailService emailService;
 
     // 1. Get all patisseries
     @GetMapping("/patisseries")
@@ -37,26 +46,50 @@ public class AdminController {
 
     // 2. Validate a patisserie
     @PutMapping("/patisseries/{id}/validate")
+    @Transactional
     public ResponseEntity<ApiResponse<PatisserieResponse>> validatePatisserie(
-            @PathVariable Long id,
-            @RequestParam(required = false) String siretNumber) {
+            @PathVariable Long id) {
 
         Patisserie patisserie = patisserieRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Pâtisserie non trouvée (ID: " + id));
+                .orElseThrow(() -> new RuntimeException("Patisserie non trouvée"));
 
         patisserie.setValid(true);
-        if (siretNumber != null && !siretNumber.isBlank()) {
-            patisserie.setSiretNumber(siretNumber.trim());
-        }
-
         Patisserie updated = patisserieRepository.save(patisserie);
 
+        try {
+            // Prepare email variables
+            Map<String, String> emailVariables = Map.of(
+                    "shopName", updated.getShopName()
+            );
+
+            // Load and populate email template
+            String emailContent = emailService.loadEmailTemplate(
+                    "templates/emails/patisserie-validation.html",
+                    emailVariables
+            );
+
+            // Send email
+            emailService.sendEmail(
+                    updated.getUser().getEmail(),
+                    "Votre patisserie a été validée !",
+                    emailContent
+            );
+
+        } catch (Exception e) {
+            // Handle both template loading and email sending exceptions
+            System.err.println("Error sending validation email: " + e.getMessage());
+            // You might want to log this properly in production
+        }
+
         return ResponseEntity.ok(
-                new ApiResponse<>(convertToResponse(updated),
-                        "Pâtisserie validée avec succès",
-                        HttpStatus.OK.value())
+                new ApiResponse<>(
+                        convertToResponse(updated),
+                        "Patisserie validée avec succès",
+                        HttpStatus.OK.value()
+                )
         );
     }
+
 
     // 3. Get validated patisseries
     @GetMapping("/patisseries/valides")

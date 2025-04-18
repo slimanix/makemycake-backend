@@ -3,6 +3,7 @@ package com.bootcamp.makemycake.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -41,7 +42,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Permettre l'accès public à ces endpoints
+                        // Public endpoints
                         .requestMatchers(
                                 "/auth/**",
                                 "/v3/api-docs/**",
@@ -52,20 +53,31 @@ public class SecurityConfig {
                                 "/api/offres/patisserie/**" // GET public
                         ).permitAll()
 
-                        // Endpoints clients
+                        // Client endpoints
                         .requestMatchers(
                                 "/api/offres",          // POST
-                                "/api/client/**"
-                        ).hasAuthority("CLIENT")
+                                "/api/client/**",
+                                "/api/commandes",       // POST commande
+                                "/api/commandes/client" // GET commandes client
+                        ).hasRole("CLIENT")
 
-                        // Endpoints pâtissiers
+                        // Patissier endpoints - Updated section
                         .requestMatchers(
                                 "/api/patissier/**",
-                                "/api/offres/my-offers" // Exemple spécifique
-                        ).hasAuthority("PATISSIER")
+                                "/api/offres/my-offers",
+                                "/api/commandes**"      // Now matches with or without query params
+                        ).hasRole("PATISSIER")
 
-                        // Dans votre SecurityConfig, assurez-vous d'utiliser hasRole() partout:
-                        .requestMatchers("/api/admin/**").hasRole("ADMIN")  // Notez qu'ici on met juste "ADMIN"
+                        // Payment endpoints
+                        .requestMatchers(
+                                "/api/commandes/*/paiement"
+                        ).hasRole("CLIENT")
+
+                        // Add this to your existing requestMatchers for patissier endpoints
+                        .requestMatchers(HttpMethod.PUT, "/api/commandes/*/statut").hasRole("PATISSIER")
+
+                        // Admin endpoints
+                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/offres/*/validate").hasRole("ADMIN")
 
                         .anyRequest().authenticated()
@@ -73,4 +85,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
+
 }
