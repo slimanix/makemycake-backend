@@ -50,7 +50,11 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/api/offres",          // GET public
                                 "/api/offres/{id}",     // GET public
-                                "/api/offres/patisserie/**" // GET public
+                                "/api/offres/patisserie/**", // GET public
+                                "/websocket-test.html",  // Autorisez explicitement cette page
+                                "/static/**",           // Autorisez le dossier static
+                                "/ws-commandes/**",     // Autorisez les WebSockets
+                                "/error"                // Autorisez la page d'erreur
                         ).permitAll()
 
                         // Client endpoints

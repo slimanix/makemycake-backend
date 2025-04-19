@@ -21,6 +21,7 @@ public class CommandeService {
     private final PanierRepository panierRepository;
     private final CoucheRepository coucheRepository;
     private final PricingService pricingService;
+    private final CommandeNotificationService commandeNotificationService;
 
     @Transactional
     public CommandeDto creerCommande(CommandeRequest request) {
@@ -62,7 +63,15 @@ public class CommandeService {
 
         commande.calculerMontantTotal();
         Commande saved = commandeRepository.save(commande);
-        return convertToDto(saved);
+        CommandeDto dto = convertToDto(saved);
+
+        // Ajoutez cette notification après la création
+        commandeNotificationService.notifierNouvelleCommande(
+                patisserie.getId(),
+                dto
+        );
+
+        return dto;
     }
 
     public List<CommandeDto> getCommandesByCurrentClient() {
