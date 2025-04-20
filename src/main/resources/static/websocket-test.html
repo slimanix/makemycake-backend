@@ -3,17 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications de Commandes - Pâtisserie</title>
+    <title>Notifications en temps réel - Make My Cake</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.0/dist/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <style>
         .fade-in {
-            animation: fadeIn 0.5s;
+            animation: fadeIn 0.3s;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-out {
+            animation: fadeOut 0.3s;
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(10px); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
@@ -23,7 +38,7 @@
         <!-- Header -->
         <div class="bg-gradient-to-r from-blue-600 to-blue-800 p-6 text-white">
             <h1 class="text-2xl md:text-3xl font-bold">Notifications en temps réel</h1>
-            <p class="text-blue-100">Suivi des nouvelles commandes</p>
+            <p class="text-blue-100">Suivi des nouvelles commandes - Make My Cake</p>
         </div>
 
         <!-- Connection Panel -->
@@ -42,17 +57,33 @@
                         </svg>
                         <span>Connecter</span>
                     </button>
-                    <button onclick="clearNotifications()"
-                            class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition flex items-center gap-2">
+                    <button id="notificationBtn" onclick="enablePushNotifications()"
+                            class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                         </svg>
+                        <span>Notifications Push</span>
+                    </button>
+                    <button id="testBtn" onclick="sendTestNotification()"
+                            class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                        </svg>
+                        <span>Tester</span>
                     </button>
                 </div>
             </div>
             <div id="connectionStatus" class="mt-3 text-sm text-gray-500 flex items-center gap-2">
                 <div class="w-3 h-3 rounded-full bg-gray-300"></div>
                 <span>Non connecté</span>
+            </div>
+            <div id="notificationStatus" class="mt-2 text-sm text-gray-500 flex items-center gap-2 hidden">
+                <div class="w-3 h-3 rounded-full bg-gray-300"></div>
+                <span>Notifications désactivées</span>
+            </div>
+            <div id="serviceWorkerStatus" class="mt-2 text-sm text-gray-500 flex items-center gap-2 hidden">
+                <div class="w-3 h-3 rounded-full bg-gray-300"></div>
+                <span>Service Worker non enregistré</span>
             </div>
         </div>
 
@@ -73,19 +104,37 @@
 </div>
 
 <script>
+    // Variables globales
     let stompClient = null;
     let currentSubscription = null;
     let notificationCounter = 0;
     const notificationsDiv = document.getElementById('notifications');
     const notificationCountSpan = document.getElementById('notificationCount');
     const connectionStatusDiv = document.getElementById('connectionStatus');
+    const notificationStatusDiv = document.getElementById('notificationStatus');
+    const serviceWorkerStatusDiv = document.getElementById('serviceWorkerStatus');
+    let activeNotifications = new Set();
+    let pushSubscription = null;
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', () => {
+        updateConnectionStatus(false);
+        updatePageTitle();
+        checkNotificationPermission();
+        checkServiceWorker();
+    });
+
+    // Fonctions utilitaires
+    function updatePageTitle() {
+        document.title = `Notifications (${notificationCounter}) - Make My Cake`;
+    }
 
     function updateConnectionStatus(connected) {
         const statusDot = connectionStatusDiv.querySelector('div');
         const statusText = connectionStatusDiv.querySelector('span');
 
         if (connected) {
-            statusDot.className = 'w-3 h-3 rounded-full bg-green-500 animate-pulse';
+            statusDot.className = 'w-3 h-3 rounded-full bg-green-500 pulse';
             statusText.textContent = `Connecté à /topic/patisserie/${document.getElementById('patisserieId').value}/nouvelles-commandes`;
             statusText.className = 'text-green-600';
         } else {
@@ -95,6 +144,41 @@
         }
     }
 
+    function updateNotificationStatus(enabled) {
+        const statusDot = notificationStatusDiv.querySelector('div');
+        const statusText = notificationStatusDiv.querySelector('span');
+
+        notificationStatusDiv.classList.remove('hidden');
+
+        if (enabled) {
+            statusDot.className = 'w-3 h-3 rounded-full bg-green-500 pulse';
+            statusText.textContent = 'Notifications activées';
+            statusText.className = 'text-green-600';
+        } else {
+            statusDot.className = 'w-3 h-3 rounded-full bg-gray-300';
+            statusText.textContent = 'Notifications désactivées';
+            statusText.className = 'text-gray-500';
+        }
+    }
+
+    function updateServiceWorkerStatus(registered) {
+        const statusDot = serviceWorkerStatusDiv.querySelector('div');
+        const statusText = serviceWorkerStatusDiv.querySelector('span');
+
+        serviceWorkerStatusDiv.classList.remove('hidden');
+
+        if (registered) {
+            statusDot.className = 'w-3 h-3 rounded-full bg-green-500 pulse';
+            statusText.textContent = 'Service Worker enregistré';
+            statusText.className = 'text-green-600';
+        } else {
+            statusDot.className = 'w-3 h-3 rounded-full bg-gray-300';
+            statusText.textContent = 'Service Worker non enregistré';
+            statusText.className = 'text-gray-500';
+        }
+    }
+
+    // Gestion WebSocket
     function connect() {
         const patisserieId = document.getElementById('patisserieId').value;
 
@@ -155,10 +239,23 @@
         }
     }
 
-    function clearNotifications() {
-        notificationsDiv.innerHTML = '<div class="p-4 bg-gray-50 rounded-lg border border-gray-200 text-center text-gray-500">Aucune notification reçue</div>';
-        notificationCounter = 0;
-        notificationCountSpan.textContent = '0';
+    // Gestion des notifications
+    function removeNotification(notificationId) {
+        const notification = document.getElementById(`notification-${notificationId}`);
+        if (notification) {
+            notification.classList.add('fade-out');
+            setTimeout(() => {
+                notification.remove();
+                activeNotifications.delete(notificationId);
+                notificationCounter--;
+                notificationCountSpan.textContent = notificationCounter;
+                updatePageTitle();
+
+                if (notificationCounter === 0) {
+                    notificationsDiv.innerHTML = '<div class="p-4 bg-gray-50 rounded-lg border border-gray-200 text-center text-gray-500">Aucune notification reçue</div>';
+                }
+            }, 300);
+        }
     }
 
     function addNotification(commande) {
@@ -167,12 +264,27 @@
             notificationsDiv.innerHTML = '';
         }
 
+        // Vérifier si la notification existe déjà
+        if (activeNotifications.has(commande.id)) {
+            return;
+        }
+
+        activeNotifications.add(commande.id);
         notificationCounter++;
         notificationCountSpan.textContent = notificationCounter;
+        updatePageTitle();
 
         const notification = document.createElement('div');
-        notification.className = 'fade-in p-4 bg-white rounded-lg shadow border border-gray-200 hover:shadow-md transition';
+        notification.id = `notification-${commande.id}`;
+        notification.className = 'fade-in p-4 bg-white rounded-lg shadow border border-gray-200 hover:shadow-md transition relative group';
         notification.innerHTML = `
+            <button onclick="removeNotification(${commande.id})"
+                    class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity shadow-md hover:bg-red-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+
             <div class="flex justify-between items-start mb-2">
                 <div>
                     <h3 class="font-bold text-lg text-blue-600">Commande #${commande.id}</h3>
@@ -235,8 +347,185 @@
         notificationsDiv.insertBefore(notification, notificationsDiv.firstChild);
     }
 
-    // Initialisation
-    updateConnectionStatus(false);
+    // Gestion des notifications push
+    async function enablePushNotifications() {
+        try {
+            // 1. Vérifier les permissions
+            const permission = await Notification.requestPermission();
+            if (permission !== 'granted') {
+                throw new Error('Permission not granted');
+            }
+            updateNotificationStatus(permission === 'granted');
+
+            // 2. Enregistrer le Service Worker
+            const registration = await registerServiceWorker();
+            if (!registration) {
+                throw new Error('Service Worker registration failed');
+            }
+            updateServiceWorkerStatus(true);
+
+            // 3. S'abonner aux notifications push
+            pushSubscription = await subscribeToPush(registration);
+            if (!pushSubscription) {
+                throw new Error('Push subscription failed');
+            }
+
+            // 4. Envoyer l'abonnement au serveur
+            await sendSubscriptionToServer(pushSubscription);
+
+            updateNotificationStatus(true);
+            alert('Notifications push activées avec succès!');
+            return true;
+        } catch (error) {
+            console.error('Enable push notifications failed:', error);
+            updateNotificationStatus(false);
+            alert(`Erreur lors de l'activation des notifications: ${error.message}`);
+            return false;
+        }
+    }
+
+    async function registerServiceWorker() {
+        if (!('serviceWorker' in navigator)) {
+            console.error('Service workers not supported');
+            updateServiceWorkerStatus(false);
+            return null;
+        }
+
+        try {
+            const registration = await navigator.serviceWorker.register('/sw.js', {
+                scope: '/'
+            });
+            console.log('Service Worker registered with scope:', registration.scope);
+            updateServiceWorkerStatus(true);
+            return registration;
+        } catch (error) {
+            console.error('Service Worker registration failed:', error);
+            updateServiceWorkerStatus(false);
+            return null;
+        }
+    }
+
+    async function subscribeToPush(registration) {
+        try {
+            // Vérifier si déjà abonné
+            let subscription = await registration.pushManager.getSubscription();
+            if (subscription) {
+                console.log('Existing subscription found:', subscription);
+                return subscription;
+            }
+
+            // Récupérer la clé publique VAPID du serveur
+            const response = await fetch('/api/push/public-key');
+            const vapidPublicKey = await response.text();
+
+            // S'abonner
+            subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+            });
+
+            console.log('New subscription created:', subscription);
+            return subscription;
+        } catch (error) {
+            console.error('Failed to subscribe:', error);
+            throw error;
+        }
+    }
+
+    async function sendSubscriptionToServer(subscription) {
+        const patisserieId = document.getElementById('patisserieId').value;
+
+        try {
+            // Convertir les clés ArrayBuffer en base64
+            const key = subscription.getKey ? subscription.getKey('p256dh') : '';
+            const auth = subscription.getKey ? subscription.getKey('auth') : '';
+
+            const keyStr = key ? btoa(String.fromCharCode.apply(null, new Uint8Array(key))) : '';
+            const authStr = auth ? btoa(String.fromCharCode.apply(null, new Uint8Array(auth))) : '';
+
+            const response = await fetch('/api/push/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    patisserieId: parseInt(patisserieId),
+                    subscription: {
+                        endpoint: subscription.endpoint,
+                        keys: {
+                            p256dh: keyStr,
+                            auth: authStr
+                        }
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to send subscription to server: ${response.status}`);
+            }
+
+            console.log('Subscription successfully sent to server');
+            return true;
+        } catch (error) {
+            console.error('Error sending subscription to server:', error);
+            throw error;
+        }
+    }
+
+    function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    }
+
+    // Vérification des permissions
+    function checkNotificationPermission() {
+        if ('Notification' in window) {
+            updateNotificationStatus(Notification.permission === 'granted');
+        }
+    }
+
+    // Vérification du Service Worker
+    async function checkServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            try {
+                const registration = await navigator.serviceWorker.getRegistration();
+                updateServiceWorkerStatus(!!registration);
+            } catch (error) {
+                console.error('Error checking service worker:', error);
+                updateServiceWorkerStatus(false);
+            }
+        }
+    }
+
+    // Fonction de test
+    async function sendTestNotification() {
+        const patisserieId = document.getElementById('patisserieId').value;
+        try {
+            const response = await fetch(`/api/push/test-notification/${patisserieId}`, {
+                method: 'POST'
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert(`Notification de test envoyée! Abonnements trouvés: ${result.subscriptionsCount}`);
+            } else {
+                alert(`Erreur: ${result.error}`);
+            }
+        } catch (error) {
+            console.error('Error sending test notification:', error);
+            alert('Erreur lors de l\'envoi de la notification de test');
+        }
+    }
 </script>
 </body>
 </html>
