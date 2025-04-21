@@ -18,6 +18,7 @@ public class CommandeDto {
     private String telephoneClient;
     private Long patisserieId;
     private String patisserieNom;
+    private ClientInfoDto client; // Nouveau champ pour les infos client
     private List<CoucheDto> couches;
 
     @Getter @Setter
@@ -25,5 +26,13 @@ public class CommandeDto {
         private String saveur;
         private Integer epaisseur;
         private Double prix;
+    }
+
+    @Getter @Setter
+    public static class ClientInfoDto { // Nouvelle classe pour les infos client
+        private Long id;
+        private String fullName;
+        private String email;
+        private String telephone;
     }
 }

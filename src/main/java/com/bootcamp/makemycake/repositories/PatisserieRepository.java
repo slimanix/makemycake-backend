@@ -26,4 +26,5 @@ public interface PatisserieRepository extends JpaRepository<Patisserie, Long> {
 
     @Query("SELECT p FROM Patisserie p WHERE p.isValid = false")
     List<Patisserie> findAllNonValidatedPatisseries();
+
 }

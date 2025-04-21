@@ -85,6 +85,18 @@ public class CommandeService {
                 .collect(Collectors.toList());
     }
 
+    public List<CommandeDto> getCommandesByCurrentPatisserie() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        // Supposons que vous ayez une méthode pour trouver la pâtisserie par l'email de l'utilisateur
+        Patisserie patisserie = patisserieRepository.findByUserEmail(username)
+                .orElseThrow(() -> new NotFoundException("Pâtisserie non trouvée"));
+
+        return commandeRepository.findByPatisserieId(patisserie.getId()).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
     private CommandeDto convertToDto(Commande commande) {
         CommandeDto dto = new CommandeDto();
         dto.setId(commande.getId());
@@ -96,6 +108,14 @@ public class CommandeService {
         dto.setTelephoneClient(commande.getTelephoneClient());
         dto.setPatisserieId(commande.getPatisserie().getId());
         dto.setPatisserieNom(commande.getPatisserie().getShopName());
+
+        // Ajout des infos client
+        CommandeDto.ClientInfoDto clientInfo = new CommandeDto.ClientInfoDto();
+        clientInfo.setId(commande.getClient().getId());
+        clientInfo.setFullName(commande.getClient().getFullName());
+        clientInfo.setEmail(commande.getClient().getUser().getEmail());
+        clientInfo.setTelephone(commande.getTelephoneClient());
+        dto.setClient(clientInfo);
 
         dto.setCouches(commande.getCouches().stream().map(couche -> {
             CommandeDto.CoucheDto coucheDto = new CommandeDto.CoucheDto();
