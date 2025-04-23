@@ -51,6 +51,9 @@ public class SecurityConfig {
                         // Public endpoints
                         .requestMatchers(
                                 "/auth/**",
+                                "/api/patisseries/valides",
+                                "/api/patisseries/{id}",
+                                "api/offres/patisserie/{patisserieId}",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
@@ -98,20 +101,15 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(
-                "http://localhost:8080",  // Autorise votre serveur
-                "http://localhost:3000",  // Autorise un éventuel frontend React
-                "http://127.0.0.1:8080",  // Alternative à localhost
-                "http://127.0.0.1:3000"   // Alternative à localhost
-        ));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
         configuration.setExposedHeaders(List.of("Authorization")); // Important pour JWT
-
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

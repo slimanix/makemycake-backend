@@ -1,13 +1,16 @@
 package com.bootcamp.makemycake.controllers;
 
 import com.bootcamp.makemycake.dto.*;
-import com.bootcamp.makemycake.repositories.UserRepository;
+import com.bootcamp.makemycake.entities.*;
+import com.bootcamp.makemycake.repositories.*;
 import com.bootcamp.makemycake.services.AuthService;
 import com.bootcamp.makemycake.services.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,15 +18,20 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth") // Définit la route de base pour toutes les méthodes de ce contrôleur. Toutes les requêtes commenceront par "/auth", suivies de la méthode spécifique.
 public class AuthController {
 
-
     private final AuthService authService; // Service qui gère l'authentification (login, registration, activation, etc.)
     private final UserRepository userRepository; // Référentiel pour interagir avec la base de données des utilisateurs.
+    private final ClientRepository clientRepository;
+    private final PatisserieRepository patisserieRepository;
     private final EmailService emailService; // Service pour l'envoi d'e-mails, utilisé pour envoyer des liens d'activation et de réinitialisation de mot de passe.
     private final PasswordEncoder passwordEncoder; // Encodage du mot de passe pour le stockage sécurisé des mots de passe des utilisateurs.
 
-    public AuthController(AuthService authService, UserRepository userRepository, EmailService emailService, PasswordEncoder passwordEncoder) {
+    public AuthController(AuthService authService, UserRepository userRepository, 
+                         ClientRepository clientRepository, PatisserieRepository patisserieRepository,
+                         EmailService emailService, PasswordEncoder passwordEncoder) {
         this.authService = authService; // Initialisation de l'authentification service.
         this.userRepository = userRepository; // Initialisation du repository utilisateur.
+        this.clientRepository = clientRepository;
+        this.patisserieRepository = patisserieRepository;
         this.emailService = emailService; // Initialisation du service d'email.
         this.passwordEncoder = passwordEncoder; // Initialisation du service d'encodage de mot de passe.
     }
@@ -69,5 +77,47 @@ public class AuthController {
         authService.resetPassword(request.getToken(), request.getNewPassword());
 
         return ResponseEntity.ok(new ApiResponse<>("Mot de passe réinitialisé avec succès !", HttpStatus.OK.value()));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<ApiResponse<UserInfoResponse>> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        
+        UserInfoResponse.UserInfoResponseBuilder userInfoBuilder = UserInfoResponse.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .role(user.getRole())
+                .createdAt(user.getCreatedAt())
+                .enabled(user.isEnabled());
+        
+        // Add role-specific information
+        if (user.getRole() == UserRole.CLIENT) {
+            Client client = clientRepository.findByUserEmail(email)
+                    .orElseThrow(() -> new RuntimeException("Client information not found"));
+            userInfoBuilder.clientInfo(ClientInfoResponse.builder()
+                    .fullName(client.getFullName())
+                    .phoneNumber(client.getPhoneNumber())
+                    .address(client.getAddress())
+                    .build());
+        } else if (user.getRole() == UserRole.PATISSIER) {
+            Patisserie patisserie = patisserieRepository.findByUserEmail(email)
+                    .orElseThrow(() -> new RuntimeException("Patisserie information not found"));
+            userInfoBuilder.patisserieInfo(PatisserieInfoResponse.builder()
+                    .shopName(patisserie.getShopName())
+                    .phoneNumber(patisserie.getPhoneNumber())
+                    .location(patisserie.getLocation())
+                    .profilePicture(patisserie.getProfilePicture())
+                    .siretNumber(patisserie.getSiretNumber())
+                    .validated(patisserie.isValidated())
+                    .isValid(patisserie.isValid())
+                    .build());
+        }
+                
+        return ResponseEntity.ok(new ApiResponse<>(userInfoBuilder.build(), 
+            "User information retrieved successfully", HttpStatus.OK.value()));
     }
 }
