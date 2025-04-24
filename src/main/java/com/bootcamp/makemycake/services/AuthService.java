@@ -128,7 +128,7 @@ public class AuthService {
         user.setActivationToken(resetToken);
         userRepository.save(user);
 
-        String resetLink = "http://localhost:8080/auth/reset-password?token=" + resetToken;
+        String resetLink = "http://localhost:4200/auth/reset-password?token=" + resetToken;
         Map<String, String> emailVariables = Map.of("resetLink", resetLink);
         String emailContent = emailService.loadEmailTemplate("templates/emails/reset-password-email.html", emailVariables);
 

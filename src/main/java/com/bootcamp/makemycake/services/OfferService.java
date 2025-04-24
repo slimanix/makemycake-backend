@@ -12,17 +12,21 @@ import com.bootcamp.makemycake.exceptions.offre.OffreNotFoundException;
 import com.bootcamp.makemycake.repositories.OfferRepository;
 import com.bootcamp.makemycake.repositories.PatisserieRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -30,33 +34,61 @@ public class OfferService {
 
     private final OfferRepository offerRepository;
     private final PatisserieRepository patisserieRepository;
+    private final CloudinaryService cloudinaryService;
 
     public OffreResponse createOffer(OfferRequest request) {
         try {
+            log.info("Creating offer for patisserie ID: {}", request.getPatisserieId());
+
+            // Validate patisserie exists
             Patisserie patisserie = patisserieRepository.findById(request.getPatisserieId())
                     .orElseThrow(() -> new AddOfferException("Pâtisserie non trouvée"));
 
+            // Validate and upload photo
+            if (request.getPhoto() == null || request.getPhoto().isEmpty()) {
+                throw new AddOfferException("Photo requise");
+            }
+
+            String photoUrl = cloudinaryService.uploadFile(request.getPhoto());
+
+            // Build and save offer
             Offre offre = Offre.builder()
                     .typeEvenement(request.getTypeEvenement())
                     .kilos(request.getKilos())
                     .prix(request.getPrix())
-                    .photo(request.getPhoto().getOriginalFilename())
+                    .photo(photoUrl)
                     .patisserie(patisserie)
                     .valide(false)
                     .build();
 
             Offre savedOffre = offerRepository.save(offre);
+            log.info("Offer created successfully with ID: {}", savedOffre.getId());
+
             return convertToResponse(savedOffre);
+
+        } catch (AddOfferException e) {
+            log.error("Error creating offer: {}", e.getMessage());
+            throw e;
         } catch (Exception e) {
-            throw new AddOfferException("Échec création offre: " + e.getMessage(), e);
+            log.error("Unexpected error creating offer: {}", e.getMessage());
+            throw new AddOfferException("Erreur inattendue lors de la création de l'offre", e);
         }
     }
 
     public void deleteOffer(Long offerId) {
-        if (!offerRepository.existsById(offerId)) {
-            throw new DeleteOfferException("Offre introuvable");
+        try {
+            if (!offerRepository.existsById(offerId)) {
+                throw new DeleteOfferException("Offre introuvable");
+            }
+            offerRepository.deleteById(offerId);
+            log.info("Offer deleted successfully with ID: {}", offerId);
+        } catch (DeleteOfferException e) {
+            log.error("Error deleting offer: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error deleting offer: {}", e.getMessage());
+            throw new DeleteOfferException("Erreur inattendue lors de la suppression de l'offre", e);
         }
-        offerRepository.deleteById(offerId);
     }
 
     public List<OffreResponse> getAllOffers() {
@@ -72,18 +104,28 @@ public class OfferService {
     }
 
     public OffreResponse getOfferById(Long id) {
-        Offre offre = offerRepository.findById(id)
-                .orElseThrow(() -> new OffreNotFoundException("Offre introuvable"));
-        return convertToResponse(offre);
+        try {
+            Offre offre = offerRepository.findById(id)
+                    .orElseThrow(() -> new OffreNotFoundException("Offre introuvable"));
+            return convertToResponse(offre);
+        } catch (OffreNotFoundException e) {
+            log.error("Offer not found: {}", id);
+            throw e;
+        }
     }
 
     public List<OffreResponse> getOffersByPatisserie(Long patisserieId) {
-        if (!patisserieRepository.existsById(patisserieId)) {
-            throw new OffreNotFoundException("Pâtisserie introuvable");
+        try {
+            if (!patisserieRepository.existsById(patisserieId)) {
+                throw new OffreNotFoundException("Pâtisserie introuvable");
+            }
+            return offerRepository.findByPatisserie_Id(patisserieId).stream()
+                    .map(this::convertToResponse)
+                    .collect(Collectors.toList());
+        } catch (OffreNotFoundException e) {
+            log.error("Patisserie not found: {}", patisserieId);
+            throw e;
         }
-        return offerRepository.findByPatisserie_Id(patisserieId).stream()
-                .map(this::convertToResponse)
-                .collect(Collectors.toList());
     }
 
     public Page<OffreResponse> getOffersByPatisseriePaginated(Long patisserieId, int page, int size) {
@@ -92,24 +134,34 @@ public class OfferService {
                 .map(this::convertToResponse);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     public OffreResponse validateOffer(Long offerId, boolean isValid) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User currentUser = (User) authentication.getPrincipal();
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            User currentUser = (User) authentication.getPrincipal();
 
-        // Vérification du rôle ADMIN
-        if (!currentUser.getRole().equals(UserRole.ADMIN)) {
-            throw new SecurityException("Accès refusé : rôle admin requis");
+            if (!currentUser.getRole().equals(UserRole.ADMIN)) {
+                throw new SecurityException("Accès refusé : rôle admin requis");
+            }
+
+            Offre offre = offerRepository.findById(offerId)
+                    .orElseThrow(() -> new OffreNotFoundException("Offre non trouvée"));
+
+            offre.setValide(isValid);
+            offre.setAdmin(isValid ? currentUser : null);
+
+            Offre updatedOffre = offerRepository.save(offre);
+            log.info("Offer validation status updated for ID: {} - New status: {}", offerId, isValid);
+
+            return convertToResponse(updatedOffre);
+
+        } catch (OffreNotFoundException | SecurityException e) {
+            log.error("Validation error: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected validation error: {}", e.getMessage());
+            throw new RuntimeException("Erreur inattendue lors de la validation de l'offre", e);
         }
-
-        Offre offre = offerRepository.findById(offerId)
-                .orElseThrow(() -> new OffreNotFoundException("Offre non trouvée"));
-
-        offre.setValide(isValid);
-        offre.setAdmin(isValid ? currentUser : null);
-
-        Offre updatedOffre = offerRepository.save(offre);
-
-        return convertToResponse(updatedOffre);
     }
 
     private OffreResponse convertToResponse(Offre offre) {
@@ -122,7 +174,6 @@ public class OfferService {
                 .valide(offre.getValide())
                 .patisserieId(offre.getPatisserie().getId())
                 .patisserieNom(offre.getPatisserie().getShopName())
-                // Utilisation de l'email comme identifiant admin
                 .validatedByAdminId(offre.getAdmin() != null ? offre.getAdmin().getId() : null)
                 .validatedByAdminName(offre.getAdmin() != null ? offre.getAdmin().getEmail() : null)
                 .build();

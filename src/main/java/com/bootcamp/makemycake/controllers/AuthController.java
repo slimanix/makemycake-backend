@@ -2,6 +2,7 @@ package com.bootcamp.makemycake.controllers;
 
 import com.bootcamp.makemycake.dto.*;
 import com.bootcamp.makemycake.entities.*;
+import com.bootcamp.makemycake.exceptions.auth.InvalidTokenException;
 import com.bootcamp.makemycake.repositories.*;
 import com.bootcamp.makemycake.services.AuthService;
 import com.bootcamp.makemycake.services.EmailService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController // Cette annotation permet à Spring de reconnaître cette classe comme un contrôleur REST. Elle traite les requêtes HTTP et renvoie des réponses au format JSON ou d'autres formats.
 @RequestMapping("/auth") // Définit la route de base pour toutes les méthodes de ce contrôleur. Toutes les requêtes commenceront par "/auth", suivies de la méthode spécifique.
+@CrossOrigin(origins = "http://localhost:4200") // Add this line to allow requests from Angular frontend
 public class AuthController {
 
     private final AuthService authService; // Service qui gère l'authentification (login, registration, activation, etc.)
@@ -71,11 +73,21 @@ public class AuthController {
         return ResponseEntity.ok(new ApiResponse<>("Email de réinitialisation envoyé !", HttpStatus.OK.value()));
     }
 
-    @PostMapping("/reset-password") // Cette annotation définit une route HTTP POST pour réinitialiser le mot de passe.
+    @GetMapping("/reset-password")
+    public ResponseEntity<ApiResponse<String>> validateResetToken(@RequestParam String token) {
+        try {
+            // Validate the token
+            User user = userRepository.findByActivationToken(token)
+                    .orElseThrow(() -> new InvalidTokenException("Token invalide !"));
+            return ResponseEntity.ok(new ApiResponse<>("Token valide", HttpStatus.OK.value()));
+        } catch (InvalidTokenException e) {
+            return ResponseEntity.badRequest().body(new ApiResponse<>(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
+        }
+    }
+
+    @PostMapping("/reset-password")
     public ResponseEntity<ApiResponse<String>> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
-
         authService.resetPassword(request.getToken(), request.getNewPassword());
-
         return ResponseEntity.ok(new ApiResponse<>("Mot de passe réinitialisé avec succès !", HttpStatus.OK.value()));
     }
 
