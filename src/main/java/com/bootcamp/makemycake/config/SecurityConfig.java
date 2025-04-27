@@ -90,7 +90,8 @@ public class SecurityConfig {
                         ).hasRole("CLIENT")
 
                         // Add this to your existing requestMatchers for patissier endpoints
-                        .requestMatchers(HttpMethod.PUT, "/api/commandes/*/statut").hasRole("PATISSIER")
+                        .requestMatchers(HttpMethod.PUT, "/api/commandes/*/statut")
+                        .hasAnyRole("PATISSIER", "CLIENT")
 
                         // Admin endpoints
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")

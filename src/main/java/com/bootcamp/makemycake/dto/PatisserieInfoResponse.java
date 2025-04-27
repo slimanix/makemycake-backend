@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatisserieInfoResponse {
+    private Long id;
     private String shopName;
     private String phoneNumber;
     private String location;

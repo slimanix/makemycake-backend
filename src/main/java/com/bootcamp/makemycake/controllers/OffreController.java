@@ -2,6 +2,7 @@ package com.bootcamp.makemycake.controllers;
 
 import com.bootcamp.makemycake.dto.OfferRequest;
 import com.bootcamp.makemycake.dto.OffreResponse;
+import com.bootcamp.makemycake.dto.OffreDetailsResponse;
 import com.bootcamp.makemycake.services.OfferService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -69,5 +70,10 @@ public class OffreController {
         return ResponseEntity.ok(
                 offerService.validateOffer(id, isValid)
         );
+    }
+
+    @GetMapping("/{id}/details")
+    public ResponseEntity<OffreDetailsResponse> getOfferDetailsById(@PathVariable Long id) {
+        return ResponseEntity.ok(offerService.getOfferDetailsById(id));
     }
 }
