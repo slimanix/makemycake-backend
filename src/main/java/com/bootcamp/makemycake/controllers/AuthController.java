@@ -9,11 +9,13 @@ import com.bootcamp.makemycake.services.EmailService;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController // Cette annotation permet à Spring de reconnaître cette classe comme un contrôleur REST. Elle traite les requêtes HTTP et renvoie des réponses au format JSON ou d'autres formats.
 @RequestMapping("/auth") // Définit la route de base pour toutes les méthodes de ce contrôleur. Toutes les requêtes commenceront par "/auth", suivies de la méthode spécifique.
@@ -46,12 +48,13 @@ public class AuthController {
         return ResponseEntity.ok(new ApiResponse(token, "Success", 200)); // 200 est le code HTTP de succès.
     }
 
-    @PostMapping("/register") // Cette annotation définit une route HTTP POST pour l'enregistrement d'un nouvel utilisateur.
-    public ResponseEntity<ApiResponse<String>> register(@Valid @RequestBody RegisterRequest request) throws Exception {
-
-        ApiResponse<String> response = authService.register(request);
-
-        return ResponseEntity.ok(response);  // Code HTTP 200, avec la réponse d'inscription.
+    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ApiResponse<String>> register(
+            @RequestPart("request") RegisterRequest request,  // Required JSON part
+            @RequestPart(value = "profileImage", required = false) MultipartFile file  // Optional file
+    ) throws Exception {
+        ApiResponse<String> response = authService.register(request, file);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/activate") // Cette annotation définit une route HTTP GET pour activer le compte de l'utilisateur via un token.
@@ -115,14 +118,14 @@ public class AuthController {
                     .phoneNumber(client.getPhoneNumber())
                     .address(client.getAddress())
                     .build());
-        } else if (user.getRole() == UserRole.PATISSIER) {
+        }  else if (user.getRole() == UserRole.PATISSIER) {
             Patisserie patisserie = patisserieRepository.findByUserEmail(email)
                     .orElseThrow(() -> new RuntimeException("Patisserie information not found"));
             userInfoBuilder.patisserieInfo(PatisserieInfoResponse.builder()
                     .shopName(patisserie.getShopName())
                     .phoneNumber(patisserie.getPhoneNumber())
                     .location(patisserie.getLocation())
-                    .profilePicture(patisserie.getProfilePicture())
+                    .profilePicture(patisserie.getProfilePicture()) // ← THIS WAS MISSING
                     .siretNumber(patisserie.getSiretNumber())
                     .validated(patisserie.isValidated())
                     .isValid(patisserie.isValid())
