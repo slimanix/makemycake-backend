@@ -8,15 +8,19 @@ import java.util.List;
 
 @Getter @Setter
 public class CommandeRequest {
-    @NotNull
+    @NotNull(message = "L'ID de la pâtisserie est requis")
     private Long patisserieId;
+
+    @NotNull(message = "L'ID de l'offre est requis")
+    private Long offerId;
 
     @NotNull @Min(1)
     private Integer nombrePersonnes;
 
-    @NotBlank
+    @NotBlank(message = "Le glacage est requis")
     private String glacage;
 
+    @NotBlank(message = "Le numéro de téléphone est requis")
     @Pattern(regexp = "^\\+?[0-9]{8,15}$")
     private String telephone;
 

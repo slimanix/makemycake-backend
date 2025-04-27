@@ -39,7 +39,7 @@ public class CommandeController {
     }
 
     @PutMapping("/{commandeId}/statut")
-    @PreAuthorize("hasRole('PATISSIER')")
+    @PreAuthorize("hasAnyRole('PATISSIER', 'CLIENT')")
     public ResponseEntity<CommandeDto> updateStatut(
             @PathVariable Long commandeId,
             @RequestParam StatutCommande statut) {

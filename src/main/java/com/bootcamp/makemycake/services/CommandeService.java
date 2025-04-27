@@ -22,6 +22,8 @@ public class CommandeService {
     private final CoucheRepository coucheRepository;
     private final PricingService pricingService;
     private final CommandeNotificationService commandeNotificationService;
+    private final OfferRepository offerRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public CommandeDto creerCommande(CommandeRequest request) {
@@ -32,6 +34,9 @@ public class CommandeService {
 
         Patisserie patisserie = patisserieRepository.findById(request.getPatisserieId())
                 .orElseThrow(() -> new NotFoundException("Pâtisserie non trouvée"));
+
+        Offre offre = offerRepository.findById(request.getOfferId())
+                .orElseThrow(() -> new NotFoundException("Offre non trouvée"));
 
         Panier panier = panierRepository.findByClientId(client.getId())
                 .orElseGet(() -> {
@@ -48,30 +53,29 @@ public class CommandeService {
         commande.setGlacage(request.getGlacage());
         commande.setTelephoneClient(request.getTelephone());
 
-        // Ajouter les couches
+        // Add the layers (couches)
         request.getCouches().forEach(coucheReq -> {
             Couche couche = new Couche();
             couche.setSaveur(coucheReq.getSaveur());
             couche.setEpaisseur(coucheReq.getEpaisseur());
-            couche.setPrix(pricingService.calculerPrixCouche(
-                    coucheReq.getSaveur(),
-                    coucheReq.getEpaisseur()
-            ));
+            couche.setPrix(pricingService.calculerPrixCouche(coucheReq.getSaveur(), coucheReq.getEpaisseur()));
             couche.setCommande(commande);
             commande.getCouches().add(couche);
         });
 
-        commande.calculerMontantTotal();
-        Commande saved = commandeRepository.save(commande);
-        CommandeDto dto = convertToDto(saved);
-
-        // Ajoutez cette notification après la création
-        commandeNotificationService.notifierNouvelleCommande(
-                patisserie.getId(),
-                dto
+        // Calculate total price using the new pricing service
+        double montantTotal = pricingService.calculerPrixTotal(
+                request.getOfferId(),
+                request.getNombrePersonnes(),
+                request.getGlacage(),
+                request.getCouches().size()
         );
+        commande.setMontantTotal(montantTotal);
 
-        return dto;
+        Commande savedCommande = commandeRepository.save(commande);
+        commandeNotificationService.notifierNouvelleCommande(patisserie.getId(), convertToDto(savedCommande));
+
+        return convertToDto(savedCommande);
     }
 
     public List<CommandeDto> getCommandesByCurrentClient() {
@@ -133,9 +137,34 @@ public class CommandeService {
         Commande commande = commandeRepository.findById(commandeId)
                 .orElseThrow(() -> new NotFoundException("Commande non trouvée"));
 
-        // Validate status transition logic if needed
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userRepository.findByEmail(username)
+                .orElseThrow(() -> new NotFoundException("Utilisateur non trouvé"));
+
+        // Check if the user is authorized to update this commande
+        if (currentUser.getRole() == UserRole.CLIENT && 
+            !commande.getClient().getUser().getId().equals(currentUser.getId())) {
+            throw new SecurityException("Vous n'êtes pas autorisé à modifier cette commande");
+        }
+
+        if (currentUser.getRole() == UserRole.PATISSIER && 
+            !commande.getPatisserie().getUser().getId().equals(currentUser.getId())) {
+            throw new SecurityException("Vous n'êtes pas autorisé à modifier cette commande");
+        }
+
+        // Validate status transitions
         if (commande.getStatut() == StatutCommande.TERMINEE) {
             throw new IllegalStateException("Impossible de modifier une commande terminée");
+        }
+
+        // Only clients can cancel their own orders
+        if (newStatut == StatutCommande.ANNULEE && currentUser.getRole() != UserRole.CLIENT) {
+            throw new SecurityException("Seul le client peut annuler sa commande");
+        }
+
+        // Only patissiers can update to other statuses
+        if (newStatut != StatutCommande.ANNULEE && currentUser.getRole() != UserRole.PATISSIER) {
+            throw new SecurityException("Seul le pâtissier peut modifier le statut de la commande");
         }
 
         commande.setStatut(newStatut);

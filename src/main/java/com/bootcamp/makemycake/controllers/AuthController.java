@@ -122,6 +122,7 @@ public class AuthController {
             Patisserie patisserie = patisserieRepository.findByUserEmail(email)
                     .orElseThrow(() -> new RuntimeException("Patisserie information not found"));
             userInfoBuilder.patisserieInfo(PatisserieInfoResponse.builder()
+                    .id(patisserie.getId())
                     .shopName(patisserie.getShopName())
                     .phoneNumber(patisserie.getPhoneNumber())
                     .location(patisserie.getLocation())

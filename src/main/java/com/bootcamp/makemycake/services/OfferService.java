@@ -2,6 +2,8 @@ package com.bootcamp.makemycake.services;
 
 import com.bootcamp.makemycake.dto.OfferRequest;
 import com.bootcamp.makemycake.dto.OffreResponse;
+import com.bootcamp.makemycake.dto.OffreDetailsResponse;
+import com.bootcamp.makemycake.dto.PatisserieResponse;
 import com.bootcamp.makemycake.entities.Offre;
 import com.bootcamp.makemycake.entities.Patisserie;
 import com.bootcamp.makemycake.entities.User;
@@ -162,6 +164,36 @@ public class OfferService {
             log.error("Unexpected validation error: {}", e.getMessage());
             throw new RuntimeException("Erreur inattendue lors de la validation de l'offre", e);
         }
+    }
+
+    public OffreDetailsResponse getOfferDetailsById(Long id) {
+        Offre offre = offerRepository.findById(id)
+                .orElseThrow(() -> new OffreNotFoundException("Offre non trouvée"));
+
+        Patisserie patisserie = offre.getPatisserie();
+        PatisserieResponse patisserieResponse = PatisserieResponse.builder()
+                .id(patisserie.getId())
+                .shopName(patisserie.getShopName())
+                .phoneNumber(patisserie.getPhoneNumber())
+                .location(patisserie.getLocation())
+                .profilePicture(patisserie.getProfilePicture())
+                .siretNumber(patisserie.getSiretNumber())
+                .userEmail(patisserie.getUser().getEmail())
+                .nombreOffres(patisserie.getOffres().size())
+                .isValid(patisserie.isValid())
+                .build();
+
+        return OffreDetailsResponse.builder()
+                .id(offre.getId())
+                .typeEvenement(offre.getTypeEvenement())
+                .kilos(offre.getKilos())
+                .prix(offre.getPrix())
+                .photoUrl(offre.getPhoto())
+                .valide(offre.estValide())
+                .validatedByAdminId(offre.getAdmin() != null ? offre.getAdmin().getId() : null)
+                .validatedByAdminName(offre.getAdmin() != null ? offre.getAdmin().getEmail() : null)
+                .patisserie(patisserieResponse)
+                .build();
     }
 
     private OffreResponse convertToResponse(Offre offre) {
