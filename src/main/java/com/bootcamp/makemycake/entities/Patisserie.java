@@ -55,4 +55,5 @@ public class Patisserie {
     @Column(name = "is_valid", nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
     private boolean isValid = false; // Par défaut non validé
 
+
 }

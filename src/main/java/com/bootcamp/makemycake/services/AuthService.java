@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.bootcamp.makemycake.security.JwtUtils;  // Correct import
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -35,8 +36,11 @@ public class AuthService {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
+    private CloudinaryService cloudinaryService;
+
     @Transactional
-    public ApiResponse<String> register(RegisterRequest request) throws Exception {
+    public ApiResponse<String> register(RegisterRequest request, MultipartFile profileImage) throws Exception {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new UserAlreadyExistsException("Un utilisateur avec cet email existe déjà.");
         }
@@ -46,11 +50,10 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setEnabled(false);
         user.setActivationToken(UUID.randomUUID().toString());
-        user.setRole(request.getRole()); // Utilisation directe de l'enum UserRole
+        user.setRole(request.getRole());
 
         User savedUser = userRepository.save(user);
 
-        // Création du profil spécifique sans changer la logique
         if (request.getRole() == UserRole.CLIENT) {
             Client client = new Client();
             client.setUser(savedUser);
@@ -66,6 +69,13 @@ public class AuthService {
             patisserie.setLocation(request.getLocation());
             patisserie.setSiretNumber(request.getSiretNumber());
             patisserie.setValidated(false);
+
+            // Handle profile picture upload if exists
+            if (profileImage != null && !profileImage.isEmpty()) {
+                String imageUrl = cloudinaryService.uploadFile(profileImage);
+                patisserie.setProfilePicture(imageUrl);
+            }
+
             patisserieRepository.save(patisserie);
         }
 
