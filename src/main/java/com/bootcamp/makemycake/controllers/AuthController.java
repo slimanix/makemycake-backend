@@ -50,19 +50,15 @@ public class AuthController {
 
     @PostMapping(
             value = "/register",
-            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE}
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
     public ResponseEntity<ApiResponse<String>> register(
-            @RequestPart(value = "request", required = false) RegisterRequest formRequest, // For form-data
-            @RequestPart(value = "profileImage", required = false) MultipartFile file,    // For form-data file
-            @RequestBody(required = false) RegisterRequest jsonRequest                    // For raw JSON
+            @RequestPart("request") RegisterRequest request,
+            @RequestPart(value = "profileImage", required = false) MultipartFile file
     ) throws Exception {
-
-        // Determine which request type was used
-        RegisterRequest request = (jsonRequest != null) ? jsonRequest : formRequest;
-
-        if (request == null) {
-            throw new IllegalArgumentException("Request payload is required");
+        System.out.println("Received registration for: " + request.getEmail());
+        if (file != null) {
+            System.out.println("Received file: " + file.getOriginalFilename());
         }
 
         ApiResponse<String> response = authService.register(request, file);
