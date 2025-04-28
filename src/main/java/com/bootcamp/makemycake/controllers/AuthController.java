@@ -48,11 +48,23 @@ public class AuthController {
         return ResponseEntity.ok(new ApiResponse(token, "Success", 200)); // 200 est le code HTTP de succès.
     }
 
-    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(
+            value = "/register",
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE}
+    )
     public ResponseEntity<ApiResponse<String>> register(
-            @RequestPart("request") RegisterRequest request,  // Required JSON part
-            @RequestPart(value = "profileImage", required = false) MultipartFile file  // Optional file
+            @RequestPart(value = "request", required = false) RegisterRequest formRequest, // For form-data
+            @RequestPart(value = "profileImage", required = false) MultipartFile file,    // For form-data file
+            @RequestBody(required = false) RegisterRequest jsonRequest                    // For raw JSON
     ) throws Exception {
+
+        // Determine which request type was used
+        RegisterRequest request = (jsonRequest != null) ? jsonRequest : formRequest;
+
+        if (request == null) {
+            throw new IllegalArgumentException("Request payload is required");
+        }
+
         ApiResponse<String> response = authService.register(request, file);
         return ResponseEntity.ok(response);
     }
