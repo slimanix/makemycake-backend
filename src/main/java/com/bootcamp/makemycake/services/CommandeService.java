@@ -58,7 +58,7 @@ public class CommandeService {
             Couche couche = new Couche();
             couche.setSaveur(coucheReq.getSaveur());
             couche.setEpaisseur(coucheReq.getEpaisseur());
-            couche.setPrix(pricingService.calculerPrixCouche(coucheReq.getSaveur(), coucheReq.getEpaisseur()));
+            couche.setPrix(pricingService.calculerPrixCouche(coucheReq.getSaveur(), coucheReq.getEpaisseur()).doubleValue());
             couche.setCommande(commande);
             commande.getCouches().add(couche);
         });
@@ -68,8 +68,8 @@ public class CommandeService {
                 request.getOfferId(),
                 request.getNombrePersonnes(),
                 request.getGlacage(),
-                request.getCouches().size()
-        );
+                request.getCouches()
+        ).doubleValue();
         commande.setMontantTotal(montantTotal);
 
         Commande savedCommande = commandeRepository.save(commande);
