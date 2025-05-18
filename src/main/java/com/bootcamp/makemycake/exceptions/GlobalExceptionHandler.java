@@ -4,6 +4,7 @@ package com.bootcamp.makemycake.exceptions;
 import com.bootcamp.makemycake.dto.ApiResponse;
 import com.bootcamp.makemycake.exceptions.auth.*;
 import com.bootcamp.makemycake.exceptions.email.SendingEmailException;
+import com.bootcamp.makemycake.exceptions.favorite.FavoriteNotFoundException;
 import com.bootcamp.makemycake.exceptions.offre.AddOfferException;
 import com.bootcamp.makemycake.exceptions.offre.DeleteOfferException;
 import com.bootcamp.makemycake.exceptions.offre.OffreNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,13 +94,25 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiResponse> handleRuntimeException(RuntimeException e) {
-        ApiResponse response = new ApiResponse("Internal Error", e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ApiResponse> handleMaxSizeException(MaxUploadSizeExceededException ex) {
+        ApiResponse response = new ApiResponse(
+            "File size exceeds maximum limit",
+            "The uploaded file size exceeds the maximum allowed size of 5MB",
+            HttpStatus.BAD_REQUEST.value()
+        );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ApiResponse> handleRuntimeException(RuntimeException ex) {
+        ApiResponse response = new ApiResponse(
+            "Error",
+            ex.getMessage(),
+            HttpStatus.INTERNAL_SERVER_ERROR.value()
+        );
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleGenericException(Exception e) {
@@ -106,5 +120,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(FavoriteNotFoundException.class)
+    public ResponseEntity<ApiResponse> handleFavoriteNotFoundException(FavoriteNotFoundException ex) {
+        ApiResponse response = new ApiResponse("Favorite Error", ex.getMessage(), HttpStatus.NOT_FOUND.value());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 
 }

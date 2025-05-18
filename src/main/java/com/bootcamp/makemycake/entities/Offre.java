@@ -2,6 +2,8 @@ package com.bootcamp.makemycake.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "offres")  // Nom de la table en base de données
@@ -18,6 +20,10 @@ public class Offre {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
     @Column(name = "type_evenement", nullable = false)
     private String typeEvenement;  // Ex: Anniversaire, Mariage, etc.
 
@@ -26,6 +32,9 @@ public class Offre {
 
     @Column(nullable = false)
     private Double prix;   // Prix en euros (ou autre devise)
+
+    @Column(name = "ville", nullable = false, length = 255)
+    private String ville;  // Ville où l'offre est disponible
 
     @Column(name = "photo_url")
     private String photo;  // URL ou chemin de la photo

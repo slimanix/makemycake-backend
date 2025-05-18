@@ -76,4 +76,24 @@ public class OffreController {
     public ResponseEntity<OffreDetailsResponse> getOfferDetailsById(@PathVariable Long id) {
         return ResponseEntity.ok(offerService.getOfferDetailsById(id));
     }
+
+    @GetMapping("/ville/{ville}")
+    public ResponseEntity<List<OffreResponse>> getOffersByVille(@PathVariable String ville) {
+        return ResponseEntity.ok(offerService.getOffersByVille(ville));
+    }
+
+    @GetMapping("/ville/{ville}/paginated")
+    public ResponseEntity<Page<OffreResponse>> getOffersByVillePaginated(
+            @PathVariable String ville,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(offerService.getOffersByVillePaginated(ville, page, size));
+    }
+
+    @GetMapping("/ville/{ville}/patisserie/{patisserieId}")
+    public ResponseEntity<List<OffreResponse>> getOffersByVilleAndPatisserie(
+            @PathVariable String ville,
+            @PathVariable Long patisserieId) {
+        return ResponseEntity.ok(offerService.getOffersByVilleAndPatisserie(ville, patisserieId));
+    }
 }

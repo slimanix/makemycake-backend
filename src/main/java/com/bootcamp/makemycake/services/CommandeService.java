@@ -101,6 +101,31 @@ public class CommandeService {
                 .collect(Collectors.toList());
     }
 
+    public List<CommandeDto> getCommandesByPatissierId(Long patissierId) {
+        // Verify patisserie exists
+        if (!patisserieRepository.existsById(patissierId)) {
+            throw new NotFoundException("Pâtisserie non trouvée");
+        }
+
+        // Get current user for authorization check
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userRepository.findByEmail(username)
+                .orElseThrow(() -> new NotFoundException("Utilisateur non trouvé"));
+
+        // Check if user is authorized to view these orders
+        if (currentUser.getRole() == UserRole.PATISSIER) {
+            Patisserie patisserie = patisserieRepository.findByUserEmail(username)
+                    .orElseThrow(() -> new NotFoundException("Pâtisserie non trouvée"));
+            if (!patisserie.getId().equals(patissierId)) {
+                throw new SecurityException("Vous n'êtes pas autorisé à voir les commandes de cette pâtisserie");
+            }
+        }
+
+        return commandeRepository.findByPatisserieId(patissierId).stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
     private CommandeDto convertToDto(Commande commande) {
         CommandeDto dto = new CommandeDto();
         dto.setId(commande.getId());
@@ -171,5 +196,11 @@ public class CommandeService {
         Commande updated = commandeRepository.save(commande);
 
         return convertToDto(updated);
+    }
+
+    public Long getPatisserieIdByUsername(String username) {
+        return patisserieRepository.findByUserEmail(username)
+                .orElseThrow(() -> new NotFoundException("Pâtisserie non trouvée"))
+                .getId();
     }
 }

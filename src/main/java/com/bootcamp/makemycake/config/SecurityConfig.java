@@ -66,7 +66,8 @@ public class SecurityConfig {
                                 "/logo.png",
                                 "/static/**",           // Autorisez le dossier static
                                 "/ws-commandes/**",     // Autorisez les WebSockets
-                                "/error"                // Autorisez la page d'erreur
+                                "/error",
+                                "/api/cities"                // Autorisez la page d'erreur
                         ).permitAll()
 
                         // Client endpoints
@@ -97,6 +98,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/offres/*/validate").hasRole("ADMIN")
 
+                        // New request matcher for PATCH /api/patisseries/*
+                        .requestMatchers(HttpMethod.PATCH, "/api/patisseries/*").hasRole("PATISSIER")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -107,7 +111,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("Authorization")); // Important pour JWT
         configuration.setAllowCredentials(true);

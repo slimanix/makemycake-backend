@@ -24,6 +24,9 @@ public class OfferRequest {
     @DecimalMax(value = "1000.0", message = "Le prix ne peut excéder 1000€")
     private Double prix;
 
+    @NotBlank(message = "La ville est obligatoire")
+    private String ville;
+
     @NotNull(message = "La photo est obligatoire")
     @JsonIgnore
     private MultipartFile photo;
@@ -38,6 +41,7 @@ public class OfferRequest {
                 "typeEvenement='" + typeEvenement + '\'' +
                 ", kilos=" + kilos +
                 ", prix=" + prix +
+                ", ville='" + ville + '\'' +
                 ", photo=" + (photo != null ? photo.getOriginalFilename() : "null") +
                 ", patisserieId=" + patisserieId +
                 '}';
@@ -53,6 +57,7 @@ public class OfferRequest {
         private String typeEvenement;
         private Double kilos;
         private Double prix;
+        private String ville;
         private MultipartFile photo;
         private Long patisserieId;
 
@@ -71,6 +76,11 @@ public class OfferRequest {
             return this;
         }
 
+        public OfferRequestBuilder ville(String ville) {
+            this.ville = ville;
+            return this;
+        }
+
         public OfferRequestBuilder photo(MultipartFile photo) {
             this.photo = photo;
             return this;
@@ -86,6 +96,7 @@ public class OfferRequest {
             request.setTypeEvenement(typeEvenement);
             request.setKilos(kilos);
             request.setPrix(prix);
+            request.setVille(ville);
             request.setPhoto(photo);
             request.setPatisserieId(patisserieId);
             return request;

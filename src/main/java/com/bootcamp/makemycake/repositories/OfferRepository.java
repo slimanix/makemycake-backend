@@ -35,5 +35,13 @@ public interface OfferRepository extends JpaRepository<Offre, Long> {
     @Query("SELECT COUNT(o) FROM Offre o WHERE o.patisserie = :patisserie")
     long countByPatisserie(@Param("patisserie") Patisserie patisserie);
 
+    // Find offers by ville (case-insensitive search)
+    List<Offre> findByVilleIgnoreCase(String ville);
+
+    // Find offers by ville and patisserie
+    List<Offre> findByVilleIgnoreCaseAndPatisserie_Id(String ville, Long patisserieId);
+
+    // Find offers by ville with pagination
+    Page<Offre> findByVilleIgnoreCase(String ville, Pageable pageable);
 
 }

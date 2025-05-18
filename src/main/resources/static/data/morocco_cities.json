@@ -1,0 +1,3143 @@
+{
+  "cities": {
+    "count": 392,
+    "data": [
+      {
+        "names": {
+          "ar": "ﻋﻴﻦ ﺣﺮﻭﺩﺓ",
+          "en": "Ain Harrouda",
+          "fr": "Aïn Harrouda"
+        },
+        "ville_id": 1
+      },
+      {
+        "names": {
+          "ar": "ابن يخلف",
+          "en": "Ben Yakhlef",
+          "fr": "Ben Yakhlef"
+        },
+        "ville_id": 2
+      },
+      {
+        "names": {
+          "ar": "بوسكورة",
+          "en": "Bouskoura",
+          "fr": "Bouskoura"
+        },
+        "ville_id": 3
+      },
+      {
+        "names": {
+          "ar": "الدار البيضاء",
+          "en": "Casablanca",
+          "fr": "Casablanca"
+        },
+        "ville_id": 4
+      },
+      {
+        "names": {
+          "ar": "مديونة‬",
+          "en": "Mediouna",
+          "fr": "Médiouna"
+        },
+        "ville_id": 5
+      },
+      {
+        "names": {
+          "ar": "المحمدية",
+          "en": "Mohammadia",
+          "fr": "Mohammadia"
+        },
+        "ville_id": 6
+      },
+      {
+        "names": {
+          "ar": "تيط مليل",
+          "en": "Tit Mellil",
+          "fr": "Tit Mellil"
+        },
+        "ville_id": 7
+      },
+      {
+        "names": {
+          "ar": "أبي الجعد",
+          "en": "Bejaad",
+          "fr": "Bejaâd"
+        },
+        "ville_id": 8
+      },
+      {
+        "names": {
+          "ar": "بن احمد",
+          "en": "Ben Ahmed",
+          "fr": "Ben Ahmed"
+        },
+        "ville_id": 9
+      },
+      {
+        "names": {
+          "ar": "بن سليمان",
+          "en": "Benslimane",
+          "fr": "Benslimane"
+        },
+        "ville_id": 10
+      },
+      {
+        "names": {
+          "ar": "برشيد",
+          "en": "Berrechid",
+          "fr": "Berrechid"
+        },
+        "ville_id": 11
+      },
+      {
+        "names": {
+          "ar": "بو جنيبة",
+          "en": "Boujniba",
+          "fr": "Boujniba"
+        },
+        "ville_id": 12
+      },
+      {
+        "names": {
+          "ar": "بو لنوار",
+          "en": "Boulanouare",
+          "fr": "Boulanouare"
+        },
+        "ville_id": 13
+      },
+      {
+        "names": {
+          "ar": "بوزنيقة",
+          "en": "Bouznika",
+          "fr": "Bouznika"
+        },
+        "ville_id": 14
+      },
+      {
+        "names": {
+          "ar": "الدروة",
+          "en": "Deroua",
+          "fr": "Deroua"
+        },
+        "ville_id": 15
+      },
+      {
+        "names": {
+          "ar": "البروج",
+          "en": "El Borouj",
+          "fr": "El Borouj"
+        },
+        "ville_id": 16
+      },
+      {
+        "names": {
+          "ar": "الݣارة",
+          "en": "El Gara",
+          "fr": "El Gara"
+        },
+        "ville_id": 17
+      },
+      {
+        "names": {
+          "ar": "ݣيسر",
+          "en": "Guisser",
+          "fr": "Guisser"
+        },
+        "ville_id": 18
+      },
+      {
+        "names": {
+          "ar": "حطان",
+          "en": "Hattane",
+          "fr": "Hattane"
+        },
+        "ville_id": 19
+      },
+      {
+        "names": {
+          "ar": "خريبكة",
+          "en": "Khouribga",
+          "fr": "Khouribga"
+        },
+        "ville_id": 20
+      },
+      {
+        "names": {
+          "ar": "الاولاد",
+          "en": "Loulad",
+          "fr": "Loulad"
+        },
+        "ville_id": 21
+      },
+      {
+        "names": {
+          "ar": "واد زم",
+          "en": "Oued Zem",
+          "fr": "Oued Zem"
+        },
+        "ville_id": 22
+      },
+      {
+        "names": {
+          "ar": "اولاد عبو",
+          "en": "Oulad Abbou",
+          "fr": "Oulad Abbou"
+        },
+        "ville_id": 23
+      },
+      {
+        "names": {
+          "ar": "الساحل أولاد أحريز",
+          "en": "Oulad H'Riz Sahel",
+          "fr": "Oulad H'Riz Sahel"
+        },
+        "ville_id": 24
+      },
+      {
+        "names": {
+          "ar": "أولاد امراح",
+          "en": "Oulad M'rah",
+          "fr": "Oulad M'rah"
+        },
+        "ville_id": 25
+      },
+      {
+        "names": {
+          "ar": "اولاد سعيد",
+          "en": "Oulad Said",
+          "fr": "Oulad Saïd"
+        },
+        "ville_id": 26
+      },
+      {
+        "names": {
+          "ar": "أولاد سيدي بن داود",
+          "en": "Oulad Sidi Ben Daoud",
+          "fr": "Oulad Sidi Ben Daoud"
+        },
+        "ville_id": 27
+      },
+      {
+        "names": {
+          "ar": "رأس العين",
+          "en": "Ras El Ain",
+          "fr": "Ras El Aïn"
+        },
+        "ville_id": 28
+      },
+      {
+        "names": {
+          "ar": "سطات",
+          "en": "Settat",
+          "fr": "Settat"
+        },
+        "ville_id": 29
+      },
+      {
+        "names": {
+          "ar": "سيدي رحال الشاطئ",
+          "en": "Sidi Rahhal Chatai",
+          "fr": "Sidi Rahhal Chataï"
+        },
+        "ville_id": 30
+      },
+      {
+        "names": {
+          "ar": "حد السوالم",
+          "en": "Soualem",
+          "fr": "Soualem"
+        },
+        "ville_id": 31
+      },
+      {
+        "names": {
+          "ar": "أزمور",
+          "en": "Azemmour",
+          "fr": "Azemmour"
+        },
+        "ville_id": 32
+      },
+      {
+        "names": {
+          "ar": "البير الجديد",
+          "en": "Bir Jdid",
+          "fr": "Bir Jdid"
+        },
+        "ville_id": 33
+      },
+      {
+        "names": {
+          "ar": "بوݣدرة",
+          "en": "Bouguedra",
+          "fr": "Bouguedra"
+        },
+        "ville_id": 34
+      },
+      {
+        "names": {
+          "ar": "الشماعية",
+          "en": "Echemmaia",
+          "fr": "Echemmaia"
+        },
+        "ville_id": 35
+      },
+      {
+        "names": {
+          "ar": "الجديدة",
+          "en": "El Jadida",
+          "fr": "El Jadida"
+        },
+        "ville_id": 36
+      },
+      {
+        "names": {
+          "ar": "حرارة",
+          "en": "Hrara",
+          "fr": "Hrara"
+        },
+        "ville_id": 37
+      },
+      {
+        "names": {
+          "ar": "اغود",
+          "en": "Ighoud",
+          "fr": "Ighoud"
+        },
+        "ville_id": 38
+      },
+      {
+        "names": {
+          "ar": "جمعة سحيم",
+          "en": "Jamaat Shaim",
+          "fr": "Jamâat Shaim"
+        },
+        "ville_id": 39
+      },
+      {
+        "names": {
+          "ar": "الجرف الأصفر",
+          "en": "Jorf Lasfar",
+          "fr": "Jorf Lasfar"
+        },
+        "ville_id": 40
+      },
+      {
+        "names": {
+          "ar": "خميس الزمامرة",
+          "en": "Khemis Zemamra",
+          "fr": "Khemis Zemamra"
+        },
+        "ville_id": 41
+      },
+      {
+        "names": {
+          "ar": "العونات",
+          "en": "Laaounate",
+          "fr": "Laaounate"
+        },
+        "ville_id": 42
+      },
+      {
+        "names": {
+          "ar": "مولاي عبد الله",
+          "en": "Moulay Abdallah",
+          "fr": "Moulay Abdallah"
+        },
+        "ville_id": 43
+      },
+      {
+        "names": {
+          "ar": "الوالدية",
+          "en": "Oualidia",
+          "fr": "Oualidia"
+        },
+        "ville_id": 44
+      },
+      {
+        "names": {
+          "ar": "أولاد عمران",
+          "en": "Oulad Amrane",
+          "fr": "Oulad Amrane"
+        },
+        "ville_id": 45
+      },
+      {
+        "names": {
+          "ar": "أولاد فرج",
+          "en": "Oulad Frej",
+          "fr": "Oulad Frej"
+        },
+        "ville_id": 46
+      },
+      {
+        "names": {
+          "ar": "اولاد غدبان",
+          "en": "Oulad Ghadbane",
+          "fr": "Oulad Ghadbane"
+        },
+        "ville_id": 47
+      },
+      {
+        "names": {
+          "ar": "أسفي",
+          "en": "Safi",
+          "fr": "Safi"
+        },
+        "ville_id": 48
+      },
+      {
+        "names": {
+          "ar": "سبت المعرف",
+          "en": "Sebt El Maarif",
+          "fr": "Sebt El Maârif"
+        },
+        "ville_id": 49
+      },
+      {
+        "names": {
+          "ar": "سبت ݣزولة",
+          "en": "Sebt Gzoula",
+          "fr": "Sebt Gzoula"
+        },
+        "ville_id": 50
+      },
+      {
+        "names": {
+          "ar": "سيدي احمد",
+          "en": "Sidi Ahmed",
+          "fr": "Sidi Ahmed"
+        },
+        "ville_id": 51
+      },
+      {
+        "names": {
+          "ar": "سيدي علي ابن حمدوش",
+          "en": "Sidi Ali Ban Hamdouche",
+          "fr": "Sidi Ali Ban Hamdouche"
+        },
+        "ville_id": 52
+      },
+      {
+        "names": {
+          "ar": "سيدي بنور",
+          "en": "Sidi Bennour",
+          "fr": "Sidi Bennour"
+        },
+        "ville_id": 53
+      },
+      {
+        "names": {
+          "ar": "",
+          "en": "Sidi Bouzid",
+          "fr": "Sidi Bouzid"
+        },
+        "ville_id": 54
+      },
+      {
+        "names": {
+          "ar": "سيدي بوزيد",
+          "en": "Sidi Smail",
+          "fr": "Sidi Smaïl"
+        },
+        "ville_id": 55
+      },
+      {
+        "names": {
+          "ar": "اليوسفية",
+          "en": "Youssoufia",
+          "fr": "Youssoufia"
+        },
+        "ville_id": 56
+      },
+      {
+        "names": {
+          "ar": "فاس",
+          "en": "Fes",
+          "fr": "Fès"
+        },
+        "ville_id": 57
+      },
+      {
+        "names": {
+          "ar": "عين شݣاݣ",
+          "en": "Ain Cheggag",
+          "fr": "Aïn Cheggag"
+        },
+        "ville_id": 58
+      },
+      {
+        "names": {
+          "ar": "البهاليل",
+          "en": "Bhalil",
+          "fr": "Bhalil"
+        },
+        "ville_id": 59
+      },
+      {
+        "names": {
+          "ar": "بولمان",
+          "en": "Boulemane",
+          "fr": "Boulemane"
+        },
+        "ville_id": 60
+      },
+      {
+        "names": {
+          "ar": "المنزل",
+          "en": "El Menzel",
+          "fr": "El Menzel"
+        },
+        "ville_id": 61
+      },
+      {
+        "names": {
+          "ar": "كيكو",
+          "en": "Guigou",
+          "fr": "Guigou"
+        },
+        "ville_id": 62
+      },
+      {
+        "names": {
+          "ar": "إيموزار كندر",
+          "en": "Imouzzer Kandar",
+          "fr": "Imouzzer Kandar"
+        },
+        "ville_id": 63
+      },
+      {
+        "names": {
+          "ar": "إموزار مرموشة",
+          "en": "Imouzzer Marmoucha",
+          "fr": "Imouzzer Marmoucha"
+        },
+        "ville_id": 64
+      },
+      {
+        "names": {
+          "ar": "ميسور",
+          "en": "Missour",
+          "fr": "Missour"
+        },
+        "ville_id": 65
+      },
+      {
+        "names": {
+          "ar": "مولاي يعقوب",
+          "en": "Moulay Yaacoub",
+          "fr": "Moulay Yaâcoub"
+        },
+        "ville_id": 66
+      },
+      {
+        "names": {
+          "ar": "اولاد الطيب",
+          "en": "Ouled Tayeb",
+          "fr": "Ouled Tayeb"
+        },
+        "ville_id": 67
+      },
+      {
+        "names": {
+          "ar": "اوطاط الحاج",
+          "en": "Outat El Haj",
+          "fr": "Outat El Haj"
+        },
+        "ville_id": 68
+      },
+      {
+        "names": {
+          "ar": "رباط الخير",
+          "en": "Ribate El Kheir",
+          "fr": "Ribate El Kheir"
+        },
+        "ville_id": 69
+      },
+      {
+        "names": {
+          "ar": "صفرو",
+          "en": "Sefrou",
+          "fr": "Séfrou"
+        },
+        "ville_id": 70
+      },
+      {
+        "names": {
+          "ar": "السخينات",
+          "en": "Skhinate",
+          "fr": "Skhinate"
+        },
+        "ville_id": 71
+      },
+      {
+        "names": {
+          "ar": "تفجيغت",
+          "en": "Tafajight",
+          "fr": "Tafajight"
+        },
+        "ville_id": 72
+      },
+      {
+        "names": {
+          "ar": "عرباوة",
+          "en": "Arbaoua",
+          "fr": "Arbaoua"
+        },
+        "ville_id": 73
+      },
+      {
+        "names": {
+          "ar": "عين دريج",
+          "en": "Ain Dorij",
+          "fr": "Aïn Dorij"
+        },
+        "ville_id": 74
+      },
+      {
+        "names": {
+          "ar": "دار الݣداري",
+          "en": "Dar Gueddari",
+          "fr": "Dar Gueddari"
+        },
+        "ville_id": 75
+      },
+      {
+        "names": {
+          "ar": "حد كورت",
+          "en": "Had Kourt",
+          "fr": "Had Kourt"
+        },
+        "ville_id": 76
+      },
+      {
+        "names": {
+          "ar": "جرف الملحةa",
+          "en": "Jorf El Melha",
+          "fr": "Jorf El Melha"
+        },
+        "ville_id": 77
+      },
+      {
+        "names": {
+          "ar": "القنيطرة",
+          "en": "Kenitra",
+          "fr": "Kénitra"
+        },
+        "ville_id": 78
+      },
+      {
+        "names": {
+          "ar": "الخنيشات",
+          "en": "Khenichet",
+          "fr": "Khenichet"
+        },
+        "ville_id": 79
+      },
+      {
+        "names": {
+          "ar": "للا ميمونة",
+          "en": "Lalla Mimouna",
+          "fr": "Lalla Mimouna"
+        },
+        "ville_id": 80
+      },
+      {
+        "names": {
+          "ar": "مشرع بلقصيري",
+          "en": "Mechra Bel Ksiri",
+          "fr": "Mechra Bel Ksiri"
+        },
+        "ville_id": 81
+      },
+      {
+        "names": {
+          "ar": "المهدية",
+          "en": "Mehdia",
+          "fr": "Mehdia"
+        },
+        "ville_id": 82
+      },
+      {
+        "names": {
+          "ar": "مولاي بو سلهام",
+          "en": "Moulay Bousselham",
+          "fr": "Moulay Bousselham"
+        },
+        "ville_id": 83
+      },
+      {
+        "names": {
+          "ar": "سيدي علال التازي",
+          "en": "Sidi Allal Tazi",
+          "fr": "Sidi Allal Tazi"
+        },
+        "ville_id": 84
+      },
+      {
+        "names": {
+          "ar": "سيدي قاسم",
+          "en": "Sidi Kacem",
+          "fr": "Sidi Kacem"
+        },
+        "ville_id": 85
+      },
+      {
+        "names": {
+          "ar": "سيدي سليمان",
+          "en": "Sidi Slimane",
+          "fr": "Sidi Slimane"
+        },
+        "ville_id": 86
+      },
+      {
+        "names": {
+          "ar": "سيدي طيبي",
+          "en": "Sidi Taibi",
+          "fr": "Sidi Taibi"
+        },
+        "ville_id": 87
+      },
+      {
+        "names": {
+          "ar": "سيدي يحيى الغرب",
+          "en": "Sidi Yahya El Gharb",
+          "fr": "Sidi Yahya El Gharb"
+        },
+        "ville_id": 88
+      },
+      {
+        "names": {
+          "ar": "سوق الاربعاء",
+          "en": "Souk El Arbaa",
+          "fr": "Souk El Arbaa"
+        },
+        "ville_id": 89
+      },
+      {
+        "names": {
+          "ar": "أقا",
+          "en": "Akka",
+          "fr": "Akka"
+        },
+        "ville_id": 90
+      },
+      {
+        "names": {
+          "ar": "آس",
+          "en": "Assa",
+          "fr": "Assa"
+        },
+        "ville_id": 91
+      },
+      {
+        "names": {
+          "ar": "بو يزكارن",
+          "en": "Bouizakarne",
+          "fr": "Bouizakarne"
+        },
+        "ville_id": 92
+      },
+      {
+        "names": {
+          "ar": "الوطية",
+          "en": "El Ouatia",
+          "fr": "El Ouatia"
+        },
+        "ville_id": 93
+      },
+      {
+        "names": {
+          "ar": "سمارة",
+          "en": "Es-Semara",
+          "fr": "Es-Semara"
+        },
+        "ville_id": 94
+      },
+      {
+        "names": {
+          "ar": "فم الحصن",
+          "en": "Fam El Hisn",
+          "fr": "Fam El Hisn"
+        },
+        "ville_id": 95
+      },
+      {
+        "names": {
+          "ar": "فم زݣيد",
+          "en": "Foum Zguid",
+          "fr": "Foum Zguid"
+        },
+        "ville_id": 96
+      },
+      {
+        "names": {
+          "ar": "ݣلميم",
+          "en": "Guelmim",
+          "fr": "Guelmim"
+        },
+        "ville_id": 97
+      },
+      {
+        "names": {
+          "ar": "تغجيجت",
+          "en": "Taghjijt",
+          "fr": "Taghjijt"
+        },
+        "ville_id": 98
+      },
+      {
+        "names": {
+          "ar": "طانطان",
+          "en": "Tan-Tan",
+          "fr": "Tan-Tan"
+        },
+        "ville_id": 99
+      },
+      {
+        "names": {
+          "ar": "طاطا",
+          "en": "Tata",
+          "fr": "Tata"
+        },
+        "ville_id": 100
+      },
+      {
+        "names": {
+          "ar": "الزاك",
+          "en": "Zag",
+          "fr": "Zag"
+        },
+        "ville_id": 101
+      },
+      {
+        "names": {
+          "ar": "مراكش",
+          "en": "Marrakech",
+          "fr": "Marrakech"
+        },
+        "ville_id": 102
+      },
+      {
+        "names": {
+          "ar": "آيت داود",
+          "en": "Ait Daoud",
+          "fr": "Ait Daoud"
+        },
+        "ville_id": 103
+      },
+      {
+        "names": {
+          "ar": "أمزميز",
+          "en": "Amizmiz",
+          "fr": "Amizmiz"
+        },
+        "ville_id": 104
+      },
+      {
+        "names": {
+          "ar": "السهريج",
+          "en": "Assahrij",
+          "fr": "Assahrij"
+        },
+        "ville_id": 105
+      },
+      {
+        "names": {
+          "ar": "آيت ورير",
+          "en": "Ait Ourir",
+          "fr": "Aït Ourir"
+        },
+        "ville_id": 106
+      },
+      {
+        "names": {
+          "ar": "ابن جرير",
+          "en": "Ben Guerir",
+          "fr": "Ben Guerir"
+        },
+        "ville_id": 107
+      },
+      {
+        "names": {
+          "ar": "شيشاوة",
+          "en": "Chichaoua",
+          "fr": "Chichaoua"
+        },
+        "ville_id": 108
+      },
+      {
+        "names": {
+          "ar": "الحنشان",
+          "en": "El Hanchane",
+          "fr": "El Hanchane"
+        },
+        "ville_id": 109
+      },
+      {
+        "names": {
+          "ar": "قلعة السراغنة",
+          "en": "El Kelaa des Sraghna",
+          "fr": "El Kelaâ des Sraghna"
+        },
+        "ville_id": 110
+      },
+      {
+        "names": {
+          "ar": "الصويرة",
+          "en": "Essaouira",
+          "fr": "Essaouira"
+        },
+        "ville_id": 111
+      },
+      {
+        "names": {
+          "ar": "الفرائطة",
+          "en": "Fraita",
+          "fr": "Fraïta"
+        },
+        "ville_id": 112
+      },
+      {
+        "names": {
+          "ar": "اغمات",
+          "en": "Ghmate",
+          "fr": "Ghmate"
+        },
+        "ville_id": 113
+      },
+      {
+        "names": {
+          "ar": "اغونان",
+          "en": "Ighounane",
+          "fr": "Ighounane"
+        },
+        "ville_id": 114
+      },
+      {
+        "names": {
+          "ar": "إيمنتانوت",
+          "en": "Imintanoute",
+          "fr": "Imintanoute"
+        },
+        "ville_id": 115
+      },
+      {
+        "names": {
+          "ar": "القطارة",
+          "en": "Kattara",
+          "fr": "Kattara"
+        },
+        "ville_id": 116
+      },
+      {
+        "names": {
+          "ar": "للا تاكركوست",
+          "en": "Lalla Takerkoust",
+          "fr": "Lalla Takerkoust"
+        },
+        "ville_id": 117
+      },
+      {
+        "names": {
+          "ar": "لوداية",
+          "en": "Loudaya",
+          "fr": "Loudaya"
+        },
+        "ville_id": 118
+      },
+      {
+        "names": {
+          "ar": "العطاوية",
+          "en": "Laattaouia",
+          "fr": "Lâattaouia"
+        },
+        "ville_id": 119
+      },
+      {
+        "names": {
+          "ar": "مولاي إبراهيم",
+          "en": "Moulay Brahim",
+          "fr": "Moulay Brahim"
+        },
+        "ville_id": 120
+      },
+      {
+        "names": {
+          "ar": "امزوضة",
+          "en": "Mzouda",
+          "fr": "Mzouda"
+        },
+        "ville_id": 121
+      },
+      {
+        "names": {
+          "ar": "اوناغا",
+          "en": "Ounagha",
+          "fr": "Ounagha"
+        },
+        "ville_id": 122
+      },
+      {
+        "names": {
+          "ar": "سيد المختار",
+          "en": "Sid L'Mokhtar",
+          "fr": "Sid L'Mokhtar"
+        },
+        "ville_id": 123
+      },
+      {
+        "names": {
+          "ar": "سيدي الزوين",
+          "en": "Sid Zouin",
+          "fr": "Sid Zouin"
+        },
+        "ville_id": 124
+      },
+      {
+        "names": {
+          "ar": "سيدي عبد الله غياث",
+          "en": "Sidi Abdallah Ghiat",
+          "fr": "Sidi Abdallah Ghiat"
+        },
+        "ville_id": 125
+      },
+      {
+        "names": {
+          "ar": "سيدي بوعثمان",
+          "en": "Sidi Bou Othmane",
+          "fr": "Sidi Bou Othmane"
+        },
+        "ville_id": 126
+      },
+      {
+        "names": {
+          "ar": "سيدي رحال",
+          "en": "Sidi Rahhal",
+          "fr": "Sidi Rahhal"
+        },
+        "ville_id": 127
+      },
+      {
+        "names": {
+          "ar": "صخور رحمنا",
+          "en": "Skhour Rehamna",
+          "fr": "Skhour Rehamna"
+        },
+        "ville_id": 128
+      },
+      {
+        "names": {
+          "ar": "سميمو",
+          "en": "Smimou",
+          "fr": "Smimou"
+        },
+        "ville_id": 129
+      },
+      {
+        "names": {
+          "ar": "تفتاشت",
+          "en": "Tafetachte",
+          "fr": "Tafetachte"
+        },
+        "ville_id": 130
+      },
+      {
+        "names": {
+          "ar": "تحناوت",
+          "en": "Tahannaout",
+          "fr": "Tahannaout"
+        },
+        "ville_id": 131
+      },
+      {
+        "names": {
+          "ar": "تالمست",
+          "en": "Talmest",
+          "fr": "Talmest"
+        },
+        "ville_id": 132
+      },
+      {
+        "names": {
+          "ar": "تاملالت",
+          "en": "Tamallalt",
+          "fr": "Tamallalt"
+        },
+        "ville_id": 133
+      },
+      {
+        "names": {
+          "ar": "تمنار",
+          "en": "Tamanar",
+          "fr": "Tamanar"
+        },
+        "ville_id": 134
+      },
+      {
+        "names": {
+          "ar": "تامنصورت",
+          "en": "Tamansourt",
+          "fr": "Tamansourt"
+        },
+        "ville_id": 135
+      },
+      {
+        "names": {
+          "ar": "تامصلوحت",
+          "en": "Tameslouht",
+          "fr": "Tameslouht"
+        },
+        "ville_id": 136
+      },
+      {
+        "names": {
+          "ar": "تنالت",
+          "en": "Tanalt",
+          "fr": "Tanalt"
+        },
+        "ville_id": 137
+      },
+      {
+        "names": {
+          "ar": "مكناس",
+          "en": "Meknes",
+          "fr": "Meknès"
+        },
+        "ville_id": 138
+      },
+      {
+        "names": {
+          "ar": "خنيفرة",
+          "en": "Khenifra",
+          "fr": "Khénifra"
+        },
+        "ville_id": 139
+      },
+      {
+        "names": {
+          "ar": "اݣوراي",
+          "en": "Agourai",
+          "fr": "Agourai"
+        },
+        "ville_id": 140
+      },
+      {
+        "names": {
+          "ar": "عين تاوجطات",
+          "en": "Ain Taoujdate",
+          "fr": "Ain Taoujdate"
+        },
+        "ville_id": 141
+      },
+      {
+        "names": {
+          "ar": "مولاي عالي الشريف",
+          "en": "MyAliCherif",
+          "fr": "MyAliCherif"
+        },
+        "ville_id": 142
+      },
+      {
+        "names": {
+          "ar": "الريصاني",
+          "en": "Rissani",
+          "fr": "Rissani"
+        },
+        "ville_id": 143
+      },
+      {
+        "names": {
+          "ar": "املو إغربن",
+          "en": "Amalou Ighriben",
+          "fr": "Amalou Ighriben"
+        },
+        "ville_id": 144
+      },
+      {
+        "names": {
+          "ar": "أوفوس",
+          "en": "Aoufous",
+          "fr": "Aoufous"
+        },
+        "ville_id": 145
+      },
+      {
+        "names": {
+          "ar": "أرفود",
+          "en": "Arfoud",
+          "fr": "Arfoud"
+        },
+        "ville_id": 146
+      },
+      {
+        "names": {
+          "ar": "أزرو",
+          "en": "Azrou",
+          "fr": "Azrou"
+        },
+        "ville_id": 147
+      },
+      {
+        "names": {
+          "ar": "عين الجمعة",
+          "en": "Ain Jemaa",
+          "fr": "Aïn Jemaa"
+        },
+        "ville_id": 148
+      },
+      {
+        "names": {
+          "ar": "عين الكرمة",
+          "en": "Ain Karma",
+          "fr": "Aïn Karma"
+        },
+        "ville_id": 149
+      },
+      {
+        "names": {
+          "ar": "عين اللوح",
+          "en": "Ain Leuh",
+          "fr": "Aïn Leuh"
+        },
+        "ville_id": 150
+      },
+      {
+        "names": {
+          "ar": "ايت بو بيدمان",
+          "en": "Ait Boubidmane",
+          "fr": "Aït Boubidmane"
+        },
+        "ville_id": 151
+      },
+      {
+        "names": {
+          "ar": "أيت اسحاق",
+          "en": "Ait Ishaq",
+          "fr": "Aït Ishaq"
+        },
+        "ville_id": 152
+      },
+      {
+        "names": {
+          "ar": "بودنيب",
+          "en": "Boudnib",
+          "fr": "Boudnib"
+        },
+        "ville_id": 153
+      },
+      {
+        "names": {
+          "ar": "بوفكران",
+          "en": "Boufakrane",
+          "fr": "Boufakrane"
+        },
+        "ville_id": 154
+      },
+      {
+        "names": {
+          "ar": "بومية",
+          "en": "Boumia",
+          "fr": "Boumia"
+        },
+        "ville_id": 155
+      },
+      {
+        "names": {
+          "ar": "الحاجب",
+          "en": "El Hajeb",
+          "fr": "El Hajeb"
+        },
+        "ville_id": 156
+      },
+      {
+        "names": {
+          "ar": "القباب",
+          "en": "Elkbab",
+          "fr": "Elkbab"
+        },
+        "ville_id": 157
+      },
+      {
+        "names": {
+          "ar": "الريش",
+          "en": "Er-Rich",
+          "fr": "Er-Rich"
+        },
+        "ville_id": 158
+      },
+      {
+        "names": {
+          "ar": "الرشيدية",
+          "en": "Errachidia",
+          "fr": "Errachidia"
+        },
+        "ville_id": 159
+      },
+      {
+        "names": {
+          "ar": "تنجداد",
+          "en": "Gardmit",
+          "fr": "Gardmit"
+        },
+        "ville_id": 160
+      },
+      {
+        "names": {
+          "ar": "كلميمة",
+          "en": "Goulmima",
+          "fr": "Goulmima"
+        },
+        "ville_id": 161
+      },
+      {
+        "names": {
+          "ar": "ݣرامة",
+          "en": "Gourrama",
+          "fr": "Gourrama"
+        },
+        "ville_id": 162
+      },
+      {
+        "names": {
+          "ar": "أحد بوحسوسن",
+          "en": "Had Bouhssoussen",
+          "fr": "Had Bouhssoussen"
+        },
+        "ville_id": 163
+      },
+      {
+        "names": {
+          "ar": "الحاج قدور",
+          "en": "El Haj Kaddour",
+          "fr": "El Haj Kaddour"
+        },
+        "ville_id": 164
+      },
+      {
+        "names": {
+          "ar": "إيفران",
+          "en": "Ifrane",
+          "fr": "Ifrane"
+        },
+        "ville_id": 165
+      },
+      {
+        "names": {
+          "ar": "إتزار",
+          "en": "Itzer",
+          "fr": "Itzer"
+        },
+        "ville_id": 166
+      },
+      {
+        "names": {
+          "ar": "جرف",
+          "en": "Jorf",
+          "fr": "Jorf"
+        },
+        "ville_id": 167
+      },
+      {
+        "names": {
+          "ar": "كهف النسور",
+          "en": "Kehf Nsour",
+          "fr": "Kehf Nsour"
+        },
+        "ville_id": 168
+      },
+      {
+        "names": {
+          "ar": "كروشن",
+          "en": "Kerrouchen",
+          "fr": "Kerrouchen"
+        },
+        "ville_id": 169
+      },
+      {
+        "names": {
+          "ar": "المهاية",
+          "en": "M'haya",
+          "fr": "M'haya"
+        },
+        "ville_id": 170
+      },
+      {
+        "names": {
+          "ar": "مريرت",
+          "en": "M'rirt",
+          "fr": "M'rirt"
+        },
+        "ville_id": 171
+      },
+      {
+        "names": {
+          "ar": "ميدلت",
+          "en": "Midelt",
+          "fr": "Midelt"
+        },
+        "ville_id": 172
+      },
+      {
+        "names": {
+          "ar": "مولاي علي شريف",
+          "en": "Moulay Ali Cherif",
+          "fr": "Moulay Ali Cherif"
+        },
+        "ville_id": 173
+      },
+      {
+        "names": {
+          "ar": "مولاي بوعزة",
+          "en": "Moulay Bouazza",
+          "fr": "Moulay Bouazza"
+        },
+        "ville_id": 174
+      },
+      {
+        "names": {
+          "ar": "مولاي ادريس زرهون",
+          "en": "Moulay Idriss Zerhoun",
+          "fr": "Moulay Idriss Zerhoun"
+        },
+        "ville_id": 175
+      },
+      {
+        "names": {
+          "ar": "موساوة",
+          "en": "Moussaoua",
+          "fr": "Moussaoua"
+        },
+        "ville_id": 176
+      },
+      {
+        "names": {
+          "ar": "نزالة بني عمار",
+          "en": "N'Zalat Bni Amar",
+          "fr": "N'Zalat Bni Amar"
+        },
+        "ville_id": 177
+      },
+      {
+        "names": {
+          "ar": "واومانة",
+          "en": "Ouaoumana",
+          "fr": "Ouaoumana"
+        },
+        "ville_id": 178
+      },
+      {
+        "names": {
+          "ar": "واد إيفران",
+          "en": "Oued Ifrane",
+          "fr": "Oued Ifrane"
+        },
+        "ville_id": 179
+      },
+      {
+        "names": {
+          "ar": "سبع عيون",
+          "en": "Sabaa Aiyoun",
+          "fr": "Sabaa Aiyoun"
+        },
+        "ville_id": 180
+      },
+      {
+        "names": {
+          "ar": "سبت جحجوح",
+          "en": "Sebt Jahjouh",
+          "fr": "Sebt Jahjouh"
+        },
+        "ville_id": 181
+      },
+      {
+        "names": {
+          "ar": "سيدي عدي",
+          "en": "Sidi Addi",
+          "fr": "Sidi Addi"
+        },
+        "ville_id": 182
+      },
+      {
+        "names": {
+          "ar": "تيشوت",
+          "en": "Tichoute",
+          "fr": "Tichoute"
+        },
+        "ville_id": 183
+      },
+      {
+        "names": {
+          "ar": "تغسالين",
+          "en": "Tighassaline",
+          "fr": "Tighassaline"
+        },
+        "ville_id": 184
+      },
+      {
+        "names": {
+          "ar": "تيغزة",
+          "en": "Tighza",
+          "fr": "Tighza"
+        },
+        "ville_id": 185
+      },
+      {
+        "names": {
+          "ar": "تمحضيت",
+          "en": "Timahdite",
+          "fr": "Timahdite"
+        },
+        "ville_id": 186
+      },
+      {
+        "names": {
+          "ar": "تنجداد",
+          "en": "Tinejdad",
+          "fr": "Tinejdad"
+        },
+        "ville_id": 187
+      },
+      {
+        "names": {
+          "ar": "تيزكيت",
+          "en": "Tizguite",
+          "fr": "Tizguite"
+        },
+        "ville_id": 188
+      },
+      {
+        "names": {
+          "ar": "تولال",
+          "en": "Toulal",
+          "fr": "Toulal"
+        },
+        "ville_id": 189
+      },
+      {
+        "names": {
+          "ar": "تونفيت",
+          "en": "Tounfite",
+          "fr": "Tounfite"
+        },
+        "ville_id": 190
+      },
+      {
+        "names": {
+          "ar": "زاوية ايفران",
+          "en": "Zaouia d'Ifrane",
+          "fr": "Zaouia d'Ifrane"
+        },
+        "ville_id": 191
+      },
+      {
+        "names": {
+          "ar": "زايدة",
+          "en": "Zaida",
+          "fr": "Zaïda"
+        },
+        "ville_id": 192
+      },
+      {
+        "names": {
+          "ar": "احفير",
+          "en": "Ahfir",
+          "fr": "Ahfir"
+        },
+        "ville_id": 193
+      },
+      {
+        "names": {
+          "ar": "أكليم",
+          "en": "Aklim",
+          "fr": "Aklim"
+        },
+        "ville_id": 194
+      },
+      {
+        "names": {
+          "ar": "العروي",
+          "en": "Al Aroui",
+          "fr": "Al Aroui"
+        },
+        "ville_id": 195
+      },
+      {
+        "names": {
+          "ar": "عين بني مطهر",
+          "en": "Ain Bni Mathar",
+          "fr": "Aïn Bni Mathar"
+        },
+        "ville_id": 196
+      },
+      {
+        "names": {
+          "ar": "عين الرݣادة",
+          "en": "Ain Erreggada",
+          "fr": "Aïn Erreggada"
+        },
+        "ville_id": 197
+      },
+      {
+        "names": {
+          "ar": "بن الطيب",
+          "en": "Ben Taieb",
+          "fr": "Ben Taïeb"
+        },
+        "ville_id": 198
+      },
+      {
+        "names": {
+          "ar": "بَركان",
+          "en": "Berkane",
+          "fr": "Berkane"
+        },
+        "ville_id": 199
+      },
+      {
+        "names": {
+          "ar": "بني نصار",
+          "en": "Bni Ansar",
+          "fr": "Bni Ansar"
+        },
+        "ville_id": 200
+      },
+      {
+        "names": {
+          "ar": "بني شيكر",
+          "en": "Bni Chiker",
+          "fr": "Bni Chiker"
+        },
+        "ville_id": 201
+      },
+      {
+        "names": {
+          "ar": "بني درار",
+          "en": "Bni Drar",
+          "fr": "Bni Drar"
+        },
+        "ville_id": 202
+      },
+      {
+        "names": {
+          "ar": "بني تادجيت",
+          "en": "Bni Tadjite",
+          "fr": "Bni Tadjite"
+        },
+        "ville_id": 203
+      },
+      {
+        "names": {
+          "ar": "بوعنان",
+          "en": "Bouanane",
+          "fr": "Bouanane"
+        },
+        "ville_id": 204
+      },
+      {
+        "names": {
+          "ar": "بوعرفة",
+          "en": "Bouarfa",
+          "fr": "Bouarfa"
+        },
+        "ville_id": 205
+      },
+      {
+        "names": {
+          "ar": "بوهديلة",
+          "en": "Bouhdila",
+          "fr": "Bouhdila"
+        },
+        "ville_id": 206
+      },
+      {
+        "names": {
+          "ar": "دار الكبداني",
+          "en": "Dar El Kebdani",
+          "fr": "Dar El Kebdani"
+        },
+        "ville_id": 207
+      },
+      {
+        "names": {
+          "ar": "دبدو",
+          "en": "Debdou",
+          "fr": "Debdou"
+        },
+        "ville_id": 208
+      },
+      {
+        "names": {
+          "ar": "دوار الكانين",
+          "en": "Douar Kannine",
+          "fr": "Douar Kannine"
+        },
+        "ville_id": 209
+      },
+      {
+        "names": {
+          "ar": "الدريوش",
+          "en": "Driouch",
+          "fr": "Driouch"
+        },
+        "ville_id": 210
+      },
+      {
+        "names": {
+          "ar": "العيون سيدي ملوك",
+          "en": "El Aioun Sidi Mellouk",
+          "fr": "El Aïoun Sidi Mellouk"
+        },
+        "ville_id": 211
+      },
+      {
+        "names": {
+          "ar": "فرخانة",
+          "en": "Farkhana",
+          "fr": "Farkhana"
+        },
+        "ville_id": 212
+      },
+      {
+        "names": {
+          "ar": "فݣيݣ",
+          "en": "Figuig",
+          "fr": "Figuig"
+        },
+        "ville_id": 213
+      },
+      {
+        "names": {
+          "ar": "احدادن",
+          "en": "Ihddaden",
+          "fr": "Ihddaden"
+        },
+        "ville_id": 214
+      },
+      {
+        "names": {
+          "ar": "جعدار",
+          "en": "Jaadar",
+          "fr": "Jaâdar"
+        },
+        "ville_id": 215
+      },
+      {
+        "names": {
+          "ar": "جرادة",
+          "en": "Jerada",
+          "fr": "Jerada"
+        },
+        "ville_id": 216
+      },
+      {
+        "names": {
+          "ar": "قرية أركمان",
+          "en": "Kariat Arekmane",
+          "fr": "Kariat Arekmane"
+        },
+        "ville_id": 217
+      },
+      {
+        "names": {
+          "ar": "قاسيطا",
+          "en": "Kassita",
+          "fr": "Kassita"
+        },
+        "ville_id": 218
+      },
+      {
+        "names": {
+          "ar": "كرونة",
+          "en": "Kerouna",
+          "fr": "Kerouna"
+        },
+        "ville_id": 219
+      },
+      {
+        "names": {
+          "ar": "لعثامنة",
+          "en": "Laatamna",
+          "fr": "Laâtamna"
+        },
+        "ville_id": 220
+      },
+      {
+        "names": {
+          "ar": "مدّاغ",
+          "en": "Madagh",
+          "fr": "Madagh"
+        },
+        "ville_id": 221
+      },
+      {
+        "names": {
+          "ar": "ميضار",
+          "en": "Midar",
+          "fr": "Midar"
+        },
+        "ville_id": 222
+      },
+      {
+        "names": {
+          "ar": "الناظور",
+          "en": "Nador",
+          "fr": "Nador"
+        },
+        "ville_id": 223
+      },
+      {
+        "names": {
+          "ar": "النعيمة",
+          "en": "Naima",
+          "fr": "Naima"
+        },
+        "ville_id": 224
+      },
+      {
+        "names": {
+          "ar": "واد الحيمر",
+          "en": "Oued Heimer",
+          "fr": "Oued Heimer"
+        },
+        "ville_id": 225
+      },
+      {
+        "names": {
+          "ar": "وجدة",
+          "en": "Oujda",
+          "fr": "Oujda"
+        },
+        "ville_id": 226
+      },
+      {
+        "names": {
+          "ar": "راس الما",
+          "en": "Ras El Ma",
+          "fr": "Ras El Ma"
+        },
+        "ville_id": 227
+      },
+      {
+        "names": {
+          "ar": "السعيدية",
+          "en": "Saidia",
+          "fr": "Saïdia"
+        },
+        "ville_id": 228
+      },
+      {
+        "names": {
+          "ar": "سلوان",
+          "en": "Selouane",
+          "fr": "Selouane"
+        },
+        "ville_id": 229
+      },
+      {
+        "names": {
+          "ar": "سيدس بوبكر",
+          "en": "Sidi Boubker",
+          "fr": "Sidi Boubker"
+        },
+        "ville_id": 230
+      },
+      {
+        "names": {
+          "ar": "سيدي سليمان الشراعة",
+          "en": "Sidi Slimane Echcharraa",
+          "fr": "Sidi Slimane Echcharraa"
+        },
+        "ville_id": 231
+      },
+      {
+        "names": {
+          "ar": "نالسينت",
+          "en": "Talsint",
+          "fr": "Talsint"
+        },
+        "ville_id": 232
+      },
+      {
+        "names": {
+          "ar": "تاوريرت",
+          "en": "Taourirt",
+          "fr": "Taourirt"
+        },
+        "ville_id": 233
+      },
+      {
+        "names": {
+          "ar": "تندرارة",
+          "en": "Tendrara",
+          "fr": "Tendrara"
+        },
+        "ville_id": 234
+      },
+      {
+        "names": {
+          "ar": "تزتوتين",
+          "en": "Tiztoutine",
+          "fr": "Tiztoutine"
+        },
+        "ville_id": 235
+      },
+      {
+        "names": {
+          "ar": "تويمة",
+          "en": "Touima",
+          "fr": "Touima"
+        },
+        "ville_id": 236
+      },
+      {
+        "names": {
+          "ar": "تويسيت",
+          "en": "Touissit",
+          "fr": "Touissit"
+        },
+        "ville_id": 237
+      },
+      {
+        "names": {
+          "ar": "زايو",
+          "en": "Zaio",
+          "fr": "Zaïo"
+        },
+        "ville_id": 238
+      },
+      {
+        "names": {
+          "ar": "زغنغن",
+          "en": "Zeghanghane",
+          "fr": "Zeghanghane"
+        },
+        "ville_id": 239
+      },
+      {
+        "names": {
+          "ar": "الرباط",
+          "en": "Rabat",
+          "fr": "Rabat"
+        },
+        "ville_id": 240
+      },
+      {
+        "names": {
+          "ar": "سلا",
+          "en": "Sale",
+          "fr": "Salé"
+        },
+        "ville_id": 241
+      },
+      {
+        "names": {
+          "ar": "عين العودة",
+          "en": "Ain El Aouda",
+          "fr": "Ain El Aouda"
+        },
+        "ville_id": 242
+      },
+      {
+        "names": {
+          "ar": "الهرهورة",
+          "en": "Harhoura",
+          "fr": "Harhoura"
+        },
+        "ville_id": 243
+      },
+      {
+        "names": {
+          "ar": "الخميسات",
+          "en": "Khemisset",
+          "fr": "Khémisset"
+        },
+        "ville_id": 244
+      },
+      {
+        "names": {
+          "ar": "أولماس",
+          "en": "Oulmes",
+          "fr": "Oulmès"
+        },
+        "ville_id": 245
+      },
+      {
+        "names": {
+          "ar": "الرماني",
+          "en": "Rommani",
+          "fr": "Rommani"
+        },
+        "ville_id": 246
+      },
+      {
+        "names": {
+          "ar": "سيدس علال البحراوي",
+          "en": "Sidi Allal El Bahraoui",
+          "fr": "Sidi Allal El Bahraoui"
+        },
+        "ville_id": 247
+      },
+      {
+        "names": {
+          "ar": "سيدي بوقنادل",
+          "en": "Sidi Bouknadel",
+          "fr": "Sidi Bouknadel"
+        },
+        "ville_id": 248
+      },
+      {
+        "names": {
+          "ar": "الصخيرات",
+          "en": "Skhirate",
+          "fr": "Skhirate"
+        },
+        "ville_id": 249
+      },
+      {
+        "names": {
+          "ar": "تامسنا",
+          "en": "Tamesna",
+          "fr": "Tamesna"
+        },
+        "ville_id": 250
+      },
+      {
+        "names": {
+          "ar": "تمارة",
+          "en": "Temara",
+          "fr": "Témara"
+        },
+        "ville_id": 251
+      },
+      {
+        "names": {
+          "ar": "تيداس",
+          "en": "Tiddas",
+          "fr": "Tiddas"
+        },
+        "ville_id": 252
+      },
+      {
+        "names": {
+          "ar": "تيفليت",
+          "en": "Tiflet",
+          "fr": "Tiflet"
+        },
+        "ville_id": 253
+      },
+      {
+        "names": {
+          "ar": "توارݣة",
+          "en": "Touarga",
+          "fr": "Touarga"
+        },
+        "ville_id": 254
+      },
+      {
+        "names": {
+          "ar": "أكادير",
+          "en": "Agadir",
+          "fr": "Agadir"
+        },
+        "ville_id": 255
+      },
+      {
+        "names": {
+          "ar": "أكدز",
+          "en": "Agdz",
+          "fr": "Agdz"
+        },
+        "ville_id": 256
+      },
+      {
+        "names": {
+          "ar": "أكني إزمر",
+          "en": "Agni Izimmer",
+          "fr": "Agni Izimmer"
+        },
+        "ville_id": 257
+      },
+      {
+        "names": {
+          "ar": "أيت ملول",
+          "en": "Ait Melloul",
+          "fr": "Aït Melloul"
+        },
+        "ville_id": 258
+      },
+      {
+        "names": {
+          "ar": "ألنيف",
+          "en": "Alnif",
+          "fr": "Alnif"
+        },
+        "ville_id": 259
+      },
+      {
+        "names": {
+          "ar": "انزي",
+          "en": "Anzi",
+          "fr": "Anzi"
+        },
+        "ville_id": 260
+      },
+      {
+        "names": {
+          "ar": "أولوز",
+          "en": "Aoulouz",
+          "fr": "Aoulouz"
+        },
+        "ville_id": 261
+      },
+      {
+        "names": {
+          "ar": "اورير",
+          "en": "Aourir",
+          "fr": "Aourir"
+        },
+        "ville_id": 262
+      },
+      {
+        "names": {
+          "ar": "ارزان",
+          "en": "Arazane",
+          "fr": "Arazane"
+        },
+        "ville_id": 263
+      },
+      {
+        "names": {
+          "ar": "أيت باها",
+          "en": "Ait Baha",
+          "fr": "Aït Baha"
+        },
+        "ville_id": 264
+      },
+      {
+        "names": {
+          "ar": "آيت يعزا",
+          "en": "Ait Iaaza",
+          "fr": "Aït Iaâza"
+        },
+        "ville_id": 265
+      },
+      {
+        "names": {
+          "ar": "آيت يالا",
+          "en": "Ait Yalla",
+          "fr": "Aït Yalla"
+        },
+        "ville_id": 266
+      },
+      {
+        "names": {
+          "ar": "بنسركاو",
+          "en": "Ben Sergao",
+          "fr": "Ben Sergao"
+        },
+        "ville_id": 267
+      },
+      {
+        "names": {
+          "ar": "يوݣرى",
+          "en": "Biougra",
+          "fr": "Biougra"
+        },
+        "ville_id": 268
+      },
+      {
+        "names": {
+          "ar": "بومالن دادس",
+          "en": "Boumalne-Dades",
+          "fr": "Boumalne-Dadès"
+        },
+        "ville_id": 269
+      },
+      {
+        "names": {
+          "ar": "الدشيرة الجهادية",
+          "en": "Dcheira El Jihadia",
+          "fr": "Dcheira El Jihadia"
+        },
+        "ville_id": 270
+      },
+      {
+        "names": {
+          "ar": "الدرارݣة",
+          "en": "Drargua",
+          "fr": "Drargua"
+        },
+        "ville_id": 271
+      },
+      {
+        "names": {
+          "ar": "الكردان",
+          "en": "El Guerdane",
+          "fr": "El Guerdane"
+        },
+        "ville_id": 272
+      },
+      {
+        "names": {
+          "ar": "حارة اليمين",
+          "en": "Harte Lyamine",
+          "fr": "Harte Lyamine"
+        },
+        "ville_id": 273
+      },
+      {
+        "names": {
+          "ar": "إداو ڭنظيف",
+          "en": "Ida Ougnidif",
+          "fr": "Ida Ougnidif"
+        },
+        "ville_id": 274
+      },
+      {
+        "names": {
+          "ar": "افري",
+          "en": "Ifri",
+          "fr": "Ifri"
+        },
+        "ville_id": 275
+      },
+      {
+        "names": {
+          "ar": "اكدامن",
+          "en": "Igdamen",
+          "fr": "Igdamen"
+        },
+        "ville_id": 276
+      },
+      {
+        "names": {
+          "ar": "إغيل ن أومكون",
+          "en": "Ighil n'Oumgoun",
+          "fr": "Ighil n'Oumgoun"
+        },
+        "ville_id": 277
+      },
+      {
+        "names": {
+          "ar": "إيماسين",
+          "en": "Imassine",
+          "fr": "Imassine"
+        },
+        "ville_id": 278
+      },
+      {
+        "names": {
+          "ar": "إنزݣان",
+          "en": "Inezgane",
+          "fr": "Inezgane"
+        },
+        "ville_id": 279
+      },
+      {
+        "names": {
+          "ar": "إغرم",
+          "en": "Irherm",
+          "fr": "Irherm"
+        },
+        "ville_id": 280
+      },
+      {
+        "names": {
+          "ar": "قلعة امڭونة",
+          "en": "Kelaat-M'Gouna",
+          "fr": "Kelaat-M'Gouna"
+        },
+        "ville_id": 281
+      },
+      {
+        "names": {
+          "ar": "لخصاص",
+          "en": "Lakhsas",
+          "fr": "Lakhsas"
+        },
+        "ville_id": 282
+      },
+      {
+        "names": {
+          "ar": "لخصاص",
+          "en": "Lakhsass",
+          "fr": "Lakhsass"
+        },
+        "ville_id": 283
+      },
+      {
+        "names": {
+          "ar": "القليعة",
+          "en": "Lqliaa",
+          "fr": "Lqliâa"
+        },
+        "ville_id": 284
+      },
+      {
+        "names": {
+          "ar": "مسمرير",
+          "en": "M'semrir",
+          "fr": "M'semrir"
+        },
+        "ville_id": 285
+      },
+      {
+        "names": {
+          "ar": "ماسّة",
+          "en": "Massa (Maroc)",
+          "fr": "Massa (Maroc)"
+        },
+        "ville_id": 286
+      },
+      {
+        "names": {
+          "ar": "مكوس",
+          "en": "Megousse",
+          "fr": "Megousse"
+        },
+        "ville_id": 287
+      },
+      {
+        "names": {
+          "ar": "وارزازات",
+          "en": "Ouarzazate",
+          "fr": "Ouarzazate"
+        },
+        "ville_id": 288
+      },
+      {
+        "names": {
+          "ar": "اولاد برحيل",
+          "en": "Oulad Berhil",
+          "fr": "Oulad Berhil"
+        },
+        "ville_id": 289
+      },
+      {
+        "names": {
+          "ar": "أولاد تايمة",
+          "en": "Oulad Teima",
+          "fr": "Oulad Teïma"
+        },
+        "ville_id": 290
+      },
+      {
+        "names": {
+          "ar": "سرغين",
+          "en": "Sarghine",
+          "fr": "Sarghine"
+        },
+        "ville_id": 291
+      },
+      {
+        "names": {
+          "ar": "سيدي إيفني",
+          "en": "Sidi Ifni",
+          "fr": "Sidi Ifni"
+        },
+        "ville_id": 292
+      },
+      {
+        "names": {
+          "ar": "سكورة",
+          "en": "Skoura",
+          "fr": "Skoura"
+        },
+        "ville_id": 293
+      },
+      {
+        "names": {
+          "ar": "تابونت",
+          "en": "Tabounte",
+          "fr": "Tabounte"
+        },
+        "ville_id": 294
+      },
+      {
+        "names": {
+          "ar": "تافراوت",
+          "en": "Tafraout",
+          "fr": "Tafraout"
+        },
+        "ville_id": 295
+      },
+      {
+        "names": {
+          "ar": "تاغازوت",
+          "en": "Taghzout",
+          "fr": "Taghzout"
+        },
+        "ville_id": 296
+      },
+      {
+        "names": {
+          "ar": "تاكزن",
+          "en": "Tagzen",
+          "fr": "Tagzen"
+        },
+        "ville_id": 297
+      },
+      {
+        "names": {
+          "ar": "تاليوين",
+          "en": "Taliouine",
+          "fr": "Taliouine"
+        },
+        "ville_id": 298
+      },
+      {
+        "names": {
+          "ar": "تامكروت",
+          "en": "Tamegroute",
+          "fr": "Tamegroute"
+        },
+        "ville_id": 299
+      },
+      {
+        "names": {
+          "ar": "تامراغت",
+          "en": "Tamraght",
+          "fr": "Tamraght"
+        },
+        "ville_id": 300
+      },
+      {
+        "names": {
+          "ar": "نقوب",
+          "en": "Tanoumrite Nkob Zagora",
+          "fr": "Tanoumrite Nkob Zagora"
+        },
+        "ville_id": 301
+      },
+      {
+        "names": {
+          "ar": "تاوريرت ايت زغار",
+          "en": "Taourirt ait zaghar",
+          "fr": "Taourirt ait zaghar"
+        },
+        "ville_id": 302
+      },
+      {
+        "names": {
+          "ar": "تارودانت",
+          "en": "Taroudannt",
+          "fr": "Taroudannt"
+        },
+        "ville_id": 303
+      },
+      {
+        "names": {
+          "ar": "التمسية",
+          "en": "Temsia",
+          "fr": "Temsia"
+        },
+        "ville_id": 304
+      },
+      {
+        "names": {
+          "ar": "تيفنيت",
+          "en": "Tifnit",
+          "fr": "Tifnit"
+        },
+        "ville_id": 305
+      },
+      {
+        "names": {
+          "ar": "تيسكدال",
+          "en": "Tisgdal",
+          "fr": "Tisgdal"
+        },
+        "ville_id": 306
+      },
+      {
+        "names": {
+          "ar": "تزنيت",
+          "en": "Tiznit",
+          "fr": "Tiznit"
+        },
+        "ville_id": 307
+      },
+      {
+        "names": {
+          "ar": "توندوت",
+          "en": "Toundoute",
+          "fr": "Toundoute"
+        },
+        "ville_id": 308
+      },
+      {
+        "names": {
+          "ar": "زاݣورة",
+          "en": "Zagora",
+          "fr": "Zagora"
+        },
+        "ville_id": 309
+      },
+      {
+        "names": {
+          "ar": "افورار",
+          "en": "Afourar",
+          "fr": "Afourar"
+        },
+        "ville_id": 310
+      },
+      {
+        "names": {
+          "ar": "أغبالةِ",
+          "en": "Aghbala",
+          "fr": "Aghbala"
+        },
+        "ville_id": 311
+      },
+      {
+        "names": {
+          "ar": "أزيلال",
+          "en": "Azilal",
+          "fr": "Azilal"
+        },
+        "ville_id": 312
+      },
+      {
+        "names": {
+          "ar": "آيت ماجطن",
+          "en": "Ait Majden",
+          "fr": "Aït Majden"
+        },
+        "ville_id": 313
+      },
+      {
+        "names": {
+          "ar": "بني عياط",
+          "en": "Beni Ayat",
+          "fr": "Beni Ayat"
+        },
+        "ville_id": 314
+      },
+      {
+        "names": {
+          "ar": "بني ملال",
+          "en": "Beni Mellal",
+          "fr": "Béni Mellal"
+        },
+        "ville_id": 315
+      },
+      {
+        "names": {
+          "ar": "بين الويدان",
+          "en": "Bin elouidane",
+          "fr": "Bin elouidane"
+        },
+        "ville_id": 316
+      },
+      {
+        "names": {
+          "ar": "برادية",
+          "en": "Bradia",
+          "fr": "Bradia"
+        },
+        "ville_id": 317
+      },
+      {
+        "names": {
+          "ar": "بزو",
+          "en": "Bzou",
+          "fr": "Bzou"
+        },
+        "ville_id": 318
+      },
+      {
+        "names": {
+          "ar": "دار أولاد زيدوح",
+          "en": "Dar Oulad Zidouh",
+          "fr": "Dar Oulad Zidouh"
+        },
+        "ville_id": 319
+      },
+      {
+        "names": {
+          "ar": "دمنات",
+          "en": "Demnate",
+          "fr": "Demnate"
+        },
+        "ville_id": 320
+      },
+      {
+        "names": {
+          "ar": "وادي درعة",
+          "en": "Dra'a",
+          "fr": "Dra'a"
+        },
+        "ville_id": 321
+      },
+      {
+        "names": {
+          "ar": "القصيبة",
+          "en": "El Ksiba",
+          "fr": "El Ksiba"
+        },
+        "ville_id": 322
+      },
+      {
+        "names": {
+          "ar": "فم الجمعة",
+          "en": "Foum Jamaa",
+          "fr": "Foum Jamaa"
+        },
+        "ville_id": 323
+      },
+      {
+        "names": {
+          "ar": "الفقيه بن صالح",
+          "en": "Fquih Ben Salah",
+          "fr": "Fquih Ben Salah"
+        },
+        "ville_id": 324
+      },
+      {
+        "names": {
+          "ar": "قصبة تادلة",
+          "en": "Kasba Tadla",
+          "fr": "Kasba Tadla"
+        },
+        "ville_id": 325
+      },
+      {
+        "names": {
+          "ar": "واويزغت",
+          "en": "Ouaouizeght",
+          "fr": "Ouaouizeght"
+        },
+        "ville_id": 326
+      },
+      {
+        "names": {
+          "ar": "ولاد عياد",
+          "en": "Oulad Ayad",
+          "fr": "Oulad Ayad"
+        },
+        "ville_id": 327
+      },
+      {
+        "names": {
+          "ar": "ولاد مبارك",
+          "en": "Oulad M'Barek",
+          "fr": "Oulad M'Barek"
+        },
+        "ville_id": 328
+      },
+      {
+        "names": {
+          "ar": "أولاد يعيش",
+          "en": "Oulad Yaich",
+          "fr": "Oulad Yaich"
+        },
+        "ville_id": 329
+      },
+      {
+        "names": {
+          "ar": "سيدي جابر",
+          "en": "Sidi Jaber",
+          "fr": "Sidi Jaber"
+        },
+        "ville_id": 330
+      },
+      {
+        "names": {
+          "ar": "سوق السبت أولاد النمة",
+          "en": "Souk Sebt Oulad Nemma",
+          "fr": "Souk Sebt Oulad Nemma"
+        },
+        "ville_id": 331
+      },
+      {
+        "names": {
+          "ar": "زاوية الشيخ",
+          "en": "Zaouiat Cheikh",
+          "fr": "Zaouïat Cheikh"
+        },
+        "ville_id": 332
+      },
+      {
+        "names": {
+          "ar": "طنجة",
+          "en": "Tanger",
+          "fr": "Tanger"
+        },
+        "ville_id": 333
+      },
+      {
+        "names": {
+          "ar": "تطوان",
+          "en": "Tetouan",
+          "fr": "Tétouan"
+        },
+        "ville_id": 334
+      },
+      {
+        "names": {
+          "ar": "أقشور",
+          "en": "Akchour",
+          "fr": "Akchour"
+        },
+        "ville_id": 335
+      },
+      {
+        "names": {
+          "ar": "أصيلة",
+          "en": "Assilah",
+          "fr": "Assilah"
+        },
+        "ville_id": 336
+      },
+      {
+        "names": {
+          "ar": "باب برد",
+          "en": "Bab Berred",
+          "fr": "Bab Berred"
+        },
+        "ville_id": 337
+      },
+      {
+        "names": {
+          "ar": "باب تازة",
+          "en": "Bab Taza",
+          "fr": "Bab Taza"
+        },
+        "ville_id": 338
+      },
+      {
+        "names": {
+          "ar": "بريكشة",
+          "en": "Brikcha",
+          "fr": "Brikcha"
+        },
+        "ville_id": 339
+      },
+      {
+        "names": {
+          "ar": "شفشاون",
+          "en": "Chefchaouen",
+          "fr": "Chefchaouen"
+        },
+        "ville_id": 340
+      },
+      {
+        "names": {
+          "ar": "دار بن كريش",
+          "en": "Dar Bni Karrich",
+          "fr": "Dar Bni Karrich"
+        },
+        "ville_id": 341
+      },
+      {
+        "names": {
+          "ar": "دار شاوي",
+          "en": "Dar Chaoui",
+          "fr": "Dar Chaoui"
+        },
+        "ville_id": 342
+      },
+      {
+        "names": {
+          "ar": "الفنيدق",
+          "en": "Fnideq",
+          "fr": "Fnideq"
+        },
+        "ville_id": 343
+      },
+      {
+        "names": {
+          "ar": "اكزناية",
+          "en": "Gueznaia",
+          "fr": "Gueznaia"
+        },
+        "ville_id": 344
+      },
+      {
+        "names": {
+          "ar": "جبهة",
+          "en": "Jebha",
+          "fr": "Jebha"
+        },
+        "ville_id": 345
+      },
+      {
+        "names": {
+          "ar": "قرية",
+          "en": "Karia",
+          "fr": "Karia"
+        },
+        "ville_id": 346
+      },
+      {
+        "names": {
+          "ar": "خميس سهل",
+          "en": "Khemis Sahel",
+          "fr": "Khémis Sahel"
+        },
+        "ville_id": 347
+      },
+      {
+        "names": {
+          "ar": "القصر الكبير",
+          "en": "Ksar El Kebir",
+          "fr": "Ksar El Kébir"
+        },
+        "ville_id": 348
+      },
+      {
+        "names": {
+          "ar": "العرائش",
+          "en": "Larache",
+          "fr": "Larache"
+        },
+        "ville_id": 349
+      },
+      {
+        "names": {
+          "ar": "المضيق",
+          "en": "M'diq",
+          "fr": "M'diq"
+        },
+        "ville_id": 350
+      },
+      {
+        "names": {
+          "ar": "مارتيل",
+          "en": "Martil",
+          "fr": "Martil"
+        },
+        "ville_id": 351
+      },
+      {
+        "names": {
+          "ar": "مقريسات",
+          "en": "Moqrisset",
+          "fr": "Moqrisset"
+        },
+        "ville_id": 352
+      },
+      {
+        "names": {
+          "ar": "واد لاو",
+          "en": "Oued Laou",
+          "fr": "Oued Laou"
+        },
+        "ville_id": 353
+      },
+      {
+        "names": {
+          "ar": "واد الرمل",
+          "en": "Oued Rmel",
+          "fr": "Oued Rmel"
+        },
+        "ville_id": 354
+      },
+      {
+        "names": {
+          "ar": "وازان",
+          "en": "Ouazzane",
+          "fr": "Ouazzane"
+        },
+        "ville_id": 355
+      },
+      {
+        "names": {
+          "ar": "بونتا سيريس",
+          "en": "Point Cires",
+          "fr": "Point Cires"
+        },
+        "ville_id": 356
+      },
+      {
+        "names": {
+          "ar": "سيدي اليماني",
+          "en": "Sidi Lyamani",
+          "fr": "Sidi Lyamani"
+        },
+        "ville_id": 357
+      },
+      {
+        "names": {
+          "ar": "سيدي محمد بن عبدلله الريصوني",
+          "en": "Sidi Mohamed ben Abdallah el-Raisuni",
+          "fr": "Sidi Mohamed ben Abdallah el-Raisuni"
+        },
+        "ville_id": 358
+      },
+      {
+        "names": {
+          "ar": "الـزيـنـات تـطوان",
+          "en": "Zinat",
+          "fr": "Zinat"
+        },
+        "ville_id": 359
+      },
+      {
+        "names": {
+          "ar": "أجدير",
+          "en": "Ajdir",
+          "fr": "Ajdir"
+        },
+        "ville_id": 360
+      },
+      {
+        "names": {
+          "ar": "أكنول",
+          "en": "Aknoul",
+          "fr": "Aknoul"
+        },
+        "ville_id": 361
+      },
+      {
+        "names": {
+          "ar": "الحسيمة",
+          "en": "Al Hoceima",
+          "fr": "Al Hoceïma"
+        },
+        "ville_id": 362
+      },
+      {
+        "names": {
+          "ar": "آيت هشام",
+          "en": "Ait Hichem",
+          "fr": "Aït Hichem"
+        },
+        "ville_id": 363
+      },
+      {
+        "names": {
+          "ar": "بني بوعياش",
+          "en": "Bni Bouayach",
+          "fr": "Bni Bouayach"
+        },
+        "ville_id": 364
+      },
+      {
+        "names": {
+          "ar": "بني حذيفة",
+          "en": "Bni Hadifa",
+          "fr": "Bni Hadifa"
+        },
+        "ville_id": 365
+      },
+      {
+        "names": {
+          "ar": "غفساي",
+          "en": "Ghafsai",
+          "fr": "Ghafsai"
+        },
+        "ville_id": 366
+      },
+      {
+        "names": {
+          "ar": "جرسيف",
+          "en": "Guercif",
+          "fr": "Guercif"
+        },
+        "ville_id": 367
+      },
+      {
+        "names": {
+          "ar": "إمزورن",
+          "en": "Imzouren",
+          "fr": "Imzouren"
+        },
+        "ville_id": 368
+      },
+      {
+        "names": {
+          "ar": "اينـاحنـاحن",
+          "en": "Inahnahen",
+          "fr": "Inahnahen"
+        },
+        "ville_id": 369
+      },
+      {
+        "names": {
+          "ar": "إساگن كتامة",
+          "en": "Issaguen (Ketama)",
+          "fr": "Issaguen (Ketama)"
+        },
+        "ville_id": 370
+      },
+      {
+        "names": {
+          "ar": "القريةالجديدة",
+          "en": "Karia (El Jadida)",
+          "fr": "Karia (El Jadida)"
+        },
+        "ville_id": 371
+      },
+      {
+        "names": {
+          "ar": "قرية با محمد",
+          "en": "Karia Ba Mohamed",
+          "fr": "Karia Ba Mohamed"
+        },
+        "ville_id": 372
+      },
+      {
+        "names": {
+          "ar": "واد امــلــيـل",
+          "en": "Oued Amlil",
+          "fr": "Oued Amlil"
+        },
+        "ville_id": 373
+      },
+      {
+        "names": {
+          "ar": "أولاد ازباير",
+          "en": "Oulad Zbair",
+          "fr": "Oulad Zbair"
+        },
+        "ville_id": 374
+      },
+      {
+        "names": {
+          "ar": "تاهلا",
+          "en": "Tahla",
+          "fr": "Tahla"
+        },
+        "ville_id": 375
+      },
+      {
+        "names": {
+          "ar": "تالا تازكواغت",
+          "en": "Tala Tazegwaght",
+          "fr": "Tala Tazegwaght"
+        },
+        "ville_id": 376
+      },
+      {
+        "names": {
+          "ar": "تمسينت",
+          "en": "Tamassint",
+          "fr": "Tamassint"
+        },
+        "ville_id": 377
+      },
+      {
+        "names": {
+          "ar": "تاونات",
+          "en": "Taounate",
+          "fr": "Taounate"
+        },
+        "ville_id": 378
+      },
+      {
+        "names": {
+          "ar": "تارجيست",
+          "en": "Targuist",
+          "fr": "Targuist"
+        },
+        "ville_id": 379
+      },
+      {
+        "names": {
+          "ar": "تازة",
+          "en": "Taza",
+          "fr": "Taza"
+        },
+        "ville_id": 380
+      },
+      {
+        "names": {
+          "ar": "تيناست",
+          "en": "Tainaste",
+          "fr": "Taïnaste"
+        },
+        "ville_id": 381
+      },
+      {
+        "names": {
+          "ar": "ظهر السوق",
+          "en": "Thar Es-Souk",
+          "fr": "Thar Es-Souk"
+        },
+        "ville_id": 382
+      },
+      {
+        "names": {
+          "ar": "تيسة",
+          "en": "Tissa",
+          "fr": "Tissa"
+        },
+        "ville_id": 383
+      },
+      {
+        "names": {
+          "ar": "تيزي وسلي",
+          "en": "Tizi Ouasli",
+          "fr": "Tizi Ouasli"
+        },
+        "ville_id": 384
+      },
+      {
+        "names": {
+          "ar": "العيون",
+          "en": "Laayoune",
+          "fr": "Laayoune"
+        },
+        "ville_id": 385
+      },
+      {
+        "names": {
+          "ar": "المرسى",
+          "en": "El Marsa",
+          "fr": "El Marsa"
+        },
+        "ville_id": 386
+      },
+      {
+        "names": {
+          "ar": "طرفاية",
+          "en": "Tarfaya",
+          "fr": "Tarfaya"
+        },
+        "ville_id": 387
+      },
+      {
+        "names": {
+          "ar": "بوجدور",
+          "en": "Boujdour",
+          "fr": "Boujdour"
+        },
+        "ville_id": 388
+      },
+      {
+        "names": {
+          "ar": "أوسرد",
+          "en": "Awsard",
+          "fr": "Awsard"
+        },
+        "ville_id": 389
+      },
+      {
+        "names": {
+          "ar": "وادي الذهب",
+          "en": "Oued-Eddahab",
+          "fr": "Oued-Eddahab"
+        },
+        "ville_id": 390
+      },
+      {
+        "names": {
+          "ar": "اسطيحة",
+          "en": "Stehat",
+          "fr": "Stehat"
+        },
+        "ville_id": 391
+      },
+      {
+        "names": {
+          "ar": "ايت اعتاب",
+          "en": "Ait Attab",
+          "fr": "Aït Attab"
+        },
+        "ville_id": 392
+      }
+    ]
+  }
+}

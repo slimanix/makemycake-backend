@@ -55,4 +55,11 @@ public class CommandeController {
         return ResponseEntity.ok(commandeService.getCommandesByCurrentPatisserie());
     }
 
+    @GetMapping("/patissier/{patissierId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'PATISSIER')")
+    public ResponseEntity<List<CommandeDto>> getCommandesByPatissierId(
+            @PathVariable Long patissierId) {
+        return ResponseEntity.ok(commandeService.getCommandesByPatissierId(patissierId));
+    }
+
 }

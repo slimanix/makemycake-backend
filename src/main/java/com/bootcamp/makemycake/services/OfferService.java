@@ -11,6 +11,7 @@ import com.bootcamp.makemycake.entities.UserRole;
 import com.bootcamp.makemycake.exceptions.offre.AddOfferException;
 import com.bootcamp.makemycake.exceptions.offre.DeleteOfferException;
 import com.bootcamp.makemycake.exceptions.offre.OffreNotFoundException;
+import com.bootcamp.makemycake.models.City;
 import com.bootcamp.makemycake.repositories.OfferRepository;
 import com.bootcamp.makemycake.repositories.PatisserieRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,10 +38,22 @@ public class OfferService {
     private final OfferRepository offerRepository;
     private final PatisserieRepository patisserieRepository;
     private final CloudinaryService cloudinaryService;
+    private final CityService cityService;
 
     public OffreResponse createOffer(OfferRequest request) {
         try {
-            log.info("Creating offer for patisserie ID: {}", request.getPatisserieId());
+            log.info("Incoming offer creation payload: {}", request);
+
+            // Validate ville field
+            if (request.getVille() == null || request.getVille().isEmpty()) {
+                log.warn("Offer creation failed: missing ville");
+                throw new AddOfferException("Invalid or missing city (ville) selection.");
+            }
+            City city = cityService.getCityByName(request.getVille());
+            if (city == null) {
+                log.warn("Offer creation failed: invalid city name {}", request.getVille());
+                throw new AddOfferException("The selected city does not exist. Please select a valid city from the list.");
+            }
 
             // Validate patisserie exists
             Patisserie patisserie = patisserieRepository.findById(request.getPatisserieId())
@@ -58,6 +71,7 @@ public class OfferService {
                     .typeEvenement(request.getTypeEvenement())
                     .kilos(request.getKilos())
                     .prix(request.getPrix())
+                    .ville(request.getVille())
                     .photo(photoUrl)
                     .patisserie(patisserie)
                     .valide(false)
@@ -69,10 +83,10 @@ public class OfferService {
             return convertToResponse(savedOffre);
 
         } catch (AddOfferException e) {
-            log.error("Error creating offer: {}", e.getMessage());
+            log.error("Error creating offer: {} | Payload: {}", e.getMessage(), request);
             throw e;
         } catch (Exception e) {
-            log.error("Unexpected error creating offer: {}", e.getMessage());
+            log.error("Unexpected error creating offer: {} | Payload: {}", e.getMessage(), request);
             throw new AddOfferException("Erreur inattendue lors de la création de l'offre", e);
         }
     }
@@ -189,11 +203,51 @@ public class OfferService {
                 .kilos(offre.getKilos())
                 .prix(offre.getPrix())
                 .photoUrl(offre.getPhoto())
+                .ville(offre.getVille())
                 .valide(offre.estValide())
                 .validatedByAdminId(offre.getAdmin() != null ? offre.getAdmin().getId() : null)
                 .validatedByAdminName(offre.getAdmin() != null ? offre.getAdmin().getEmail() : null)
                 .patisserie(patisserieResponse)
                 .build();
+    }
+
+    public List<OffreResponse> getOffersByVille(String ville) {
+        try {
+            return offerRepository.findByVilleIgnoreCase(ville).stream()
+                    .map(this::convertToResponse)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            log.error("Error getting offers by ville: {}", e.getMessage());
+            throw new OffreNotFoundException("Erreur lors de la recherche des offres par ville");
+        }
+    }
+
+    public Page<OffreResponse> getOffersByVillePaginated(String ville, int page, int size) {
+        try {
+            return offerRepository.findByVilleIgnoreCase(ville,
+                    PageRequest.of(page, size, Sort.by("prix").ascending()))
+                    .map(this::convertToResponse);
+        } catch (Exception e) {
+            log.error("Error getting paginated offers by ville: {}", e.getMessage());
+            throw new OffreNotFoundException("Erreur lors de la recherche paginée des offres par ville");
+        }
+    }
+
+    public List<OffreResponse> getOffersByVilleAndPatisserie(String ville, Long patisserieId) {
+        try {
+            if (!patisserieRepository.existsById(patisserieId)) {
+                throw new OffreNotFoundException("Pâtisserie introuvable");
+            }
+            return offerRepository.findByVilleIgnoreCaseAndPatisserie_Id(ville, patisserieId).stream()
+                    .map(this::convertToResponse)
+                    .collect(Collectors.toList());
+        } catch (OffreNotFoundException e) {
+            log.error("Error getting offers by ville and patisserie: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error("Unexpected error getting offers by ville and patisserie: {}", e.getMessage());
+            throw new OffreNotFoundException("Erreur inattendue lors de la recherche des offres par ville et pâtisserie");
+        }
     }
 
     private OffreResponse convertToResponse(Offre offre) {
@@ -203,11 +257,13 @@ public class OfferService {
                 .kilos(offre.getKilos())
                 .prix(offre.getPrix())
                 .photoUrl(offre.getPhoto())
+                .ville(offre.getVille())
                 .valide(offre.getValide())
                 .patisserieId(offre.getPatisserie().getId())
                 .patisserieNom(offre.getPatisserie().getShopName())
                 .validatedByAdminId(offre.getAdmin() != null ? offre.getAdmin().getId() : null)
                 .validatedByAdminName(offre.getAdmin() != null ? offre.getAdmin().getEmail() : null)
+                .createdAt(offre.getCreatedAt())
                 .build();
     }
 }
